@@ -47,7 +47,7 @@
 
 transformers总体布局如下，共分为五个部分：Encoder，Decoder，Inputs Embedding，Output Embedding和Geneator。
 
-![transformers ar](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\transformers ar.png)
+![transformers ar](pics/transformers ar.png)
 
 ## EncoderDecoder class
 
@@ -147,7 +147,7 @@ self.proj = nn.Linear(d_model, vocab)用法细节补充：
 >
 > 7）实例化之后，将特征张量输入到实例化后的类中。
 
-![nn.Linear1](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\nn.Linear1.png)
+![nn.Linear1](pics/nn.Linear1.png)
 
 #### forward执行顺序问题
 
