@@ -47,7 +47,7 @@
 
 transformers总体布局如下，共分为五个部分：Encoder，Decoder，Inputs Embedding，Output Embedding和Geneator。
 
-![transformers ar](pics/transformers ar.png)
+![transformers_ar](pics/transformers_ar.png)
 
 ## EncoderDecoder class
 
@@ -153,18 +153,18 @@ self.proj = nn.Linear(d_model, vocab)用法细节补充：
 
 python class的调用过程跟C++相似，如下情况当运行```a = Children()```即实例化时，执行class中的```__init__```function，再执行基类Foo。
 
-![python顺序](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\python顺序.png)
+![python顺序](pics/python顺序.png)
 
 除了```__init__```function，还有```__call__```function，该function只有在实例被调用时才被运行。而forward便是依据```__call__```function来调用的：
 
-![call&forward](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\call&forward.png)
+![call&forward](pics/call&forward.png)
 
 这部分总结如下：
 
 > 1. forward是在```__call__```中调用的，而```__call__```函数是在类的对象使用'()'时被调用（如：`a()`）。一般调用在类中定义的函数的方法是：```a.func()```，如果只是使用```a()```，那么这个操作就是在调用```__call__```这个内置方法。
 > 2. 神经网络例中，`out = net(image)`实际上就是调用了`net`的`__call__方法`，`net`的`__call__方法`没有显式定义，那么就使用它的__父类方法__，也就是调用`nn.Module`的`__call__方法`，它调用了`forward方法`，又有，`net类`中定义了`forward方法`，所以使用重写的`forward方法`。
 
-![forward调用过程](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\forward调用过程.png)
+![forward调用过程](pics/forward调用过程.png)
 
 剩下关于forward调用的细节参见以下链接：[在PyTorch中，forward()是如何被调用的？](https://aitechtogether.com/article/32247.html)
 
@@ -172,7 +172,7 @@ python class的调用过程跟C++相似，如下情况当运行```a = Children()
 
 Encoder部分为transformers结构左侧的部分，其中内部分为N个EncoderLayer，每个EncoderLayer由两个sublayer组成：Multi-Head Attention和simple, position-wise fully connected feed-forward network，每一个sublayer外由sublayerConnection包装。Encoder的代码框架如下所示：
 
-![Encoder structure](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\Encoder structure.png)
+![Encoder_structure](pics/Encoder_structure.png)
 
 Encoder class所作的工作是深度拷贝N个EncoderLayer，并在x遍历完所有EncoderLayer后再进行一次LayerNorm。LayerNorm总共发生次数为`2N+1`次。
 
@@ -276,7 +276,7 @@ class SublayerConnection(nn.Module):
 
 其中dropout机制作用为：**在训练过程的前向传播中，让每个神经元以一定概率p处于不激活的状态。以达到减少过拟合的效果**。是一种有助于训练的trick。
 
-![dropout](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\dropout.png)
+![dropout](pics/dropout.png)
 
 Multi-Head Attention和fully connected feed-forward network两个sublayer会在Decoder structure之后补充。
 
@@ -325,7 +325,7 @@ class DecoderLayer(nn.Module):
 
 添加mask和偏移（offset）机制有效保证了预测位置i时只依据位置i前面的信息而不提前预知后面位置的信息。如图所示，每一行代表当前mask，例如对于位置0，mask[0]只有自身信息有用，而越到后面可知信息越多，以此形成正三角的形状。
 
-![mask](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\mask.png)
+![mask](pics/mask.png)
 
 ```python
 def subsequent_mask(size):
@@ -351,11 +351,11 @@ triu function 返回上三角矩阵，再通过`subsequent_mask == 0`进行01反
 
 transformers所用的attention为"Scaled Dot-Product Attention"，是得分函数之一（除此之外还有additive/concat等）其过程如下：
 
-![attention](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\attention.png)
+![attention](pics/attention.png)
 
 Q stands for "a set of queries" while K stands for "a set of keys". 两者均为向量组成的矩阵，用来反映X之间各元素的相关性，<u>key即键向量，作为某一input即单词的表示，query即查询向量，作为当前被编码词的表示。</u>该相关性最后经过softmax归一化后通过与矩阵V相乘来将该相关性反映到X当中。过程的公式和代码如下：
 
-![公式1](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\公式1.png)
+![公式1](pics/公式1.png)
 
 ```python
 def attention(query, key, value, mask=None, dropout=None):
@@ -413,13 +413,13 @@ batch[1]: [1, 1, 1, 1]
 
 QKV三者均是关于input X的线性组合，即
 
-![QKV](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\QKV.png)
+![QKV](pics/QKV.png)
 
 #### Attention过程详解
 
 由于dot-product可以转化为矩阵计算来加速，Attention内部的计算顺序变得不可见了，而虽然矩阵能够化简计算，但影响了阅读者对attention机制的理解。Attention虽然在公式上已化约为三个矩阵的计算，但顺序和每一步的意义并不如计算表面那样。
 
-![attention原理](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\attention原理.gif)
+![attention原理](pics/attention原理.gif)
 
 Attention的过程可以如上动态图表示，其中每一个input x对应着一个query、key和value，三者都是关于input x的一种表示，该表示的维度自定（图例中的维度为3），作为QKV矩阵的第二维度；QKV矩阵的第一维度为input的维度，**意味着对于input x内每一个元素，都有3个参数来反映**。
 
@@ -447,11 +447,11 @@ Attention的过程可以如上动态图表示，其中每一个input x对应着�
 
 多头注意力机制使用多组QKV，可以理解为每一组QKV表示词与词之间的联系，多组即拥有了多种联系的表示能力，其1）扩展了模型专注于不同位置的能力，2）为注意力层提供了多个“表示子空间”（如中间图所示，）。右侧图即多头注意力机制，其中参数h即head的个数，也就是切割程度。
 
-![点积与多头](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\点积与多头.png)
+![点积与多头](pics/点积与多头.png)
 
-![multi-head](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\multi-head.png)
+![multi-head](pics/multi-head.png)
 
-![multi-head2](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\multi-head2.png)
+![multi-head2](pics/multi-head2.png)
 
 可以看出多头切割的是input x的维度，也就是x中的元素分多组小的QKV组合去处理。多头注意力机制代码如下：
 
@@ -515,7 +515,7 @@ class MultiHeadedAttention(nn.Module):
 
 Position-wise Feed-Forward Networks，即基于位置的前馈网络。
 
-![FFN](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\FFN.png)
+![FFN](pics/FFN.png)
 
 除了设置两组不同参数的layer，另一种方式是将其作为两个内核大小为1的卷积（或者认为是两次线性变换，如代码中所示）来处理。The dimensionality of input and output is *d_model=512*, and the inner-layer has dimensionality *d_ff=2048*.
 
@@ -553,7 +553,7 @@ one-hot vector相当于从词汇表中将给定文本中的这些词提取出来
 
 nn.Embedding(vocab, d_model)含义是生成vocab个d_model维度的词汇表，如下图所示：
 
-![Embedding](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\Embedding.png)
+![Embedding](pics/Embedding.png)
 
 ## Positional Encoding
 
@@ -616,7 +616,7 @@ def make_model(
 
 整个encoder-decoder运行过程如下所示：
 
-![transformer_decoding_1](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\transformer_decoding_1.gif)
+![transformer_decoding_1](pics/transformer_decoding_1.gif)
 
 ##### Step1 编码器将input生成注意力向量集
 
@@ -630,10 +630,10 @@ def make_model(
 
 迭代decoder的过程，直到输出为终止符<end of sentence>，整个decoder过程结束。
 
-![transformer_decoding_2](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\transformer_decoding_2.gif)
+![transformer_decoding_2](pics/transformer_decoding_2.gif)
 
 
 
 ## 维度笔记
 
-![维度笔记](C:\Users\Administrator\Desktop\G_fs_Notes\Notes\Note(2023-2)\pics\维度笔记.jpg)
+![维度笔记](pics/维度笔记.jpg)
