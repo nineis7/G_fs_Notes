@@ -18,7 +18,11 @@
 4. [Transformer的Decoder的输入输出](https://www.zhihu.com/question/337886108)
 5. [Transformer模型详解（李宏毅版）](https://zhuanlan.zhihu.com/p/338817680)
 6. [详解Self-Attention和Multi-Head Attention](https://imzhanghao.com/2021/09/15/self-attention-multi-head-attention/)
-6. [Transformer代码阅读](http://fancyerii.github.io/2019/03/09/transformer-codes/)
+7. [Transformer代码阅读](http://fancyerii.github.io/2019/03/09/transformer-codes/)
+
+8. [面经：什么是Transformer位置编码？](https://zhuanlan.zhihu.com/p/398457641)
+9. [Transformer Architecture: The Positional Encoding](https://kazemnejad.com/blog/transformer_architecture_positional_encoding/)
+10. [Linear Relationships in the Transformer’s Positional Encoding](https://timodenk.com/blog/linear-relationships-in-the-transformers-positional-encoding/)
 
 
 
@@ -477,6 +481,7 @@ class MultiHeadedAttention(nn.Module):
             mask = mask.unsqueeze(1)
             # 由于分了multi-head，所以mask的维度增加一维，变成(batch, 1, 1, time)
         nbatches = query.size(0)
+        # batch的大小即query的第一维
 
         # 1) Do all the linear projections in batch from d_model => h x d_k
         query, key, value = [
@@ -583,7 +588,30 @@ class PositionalEncoding(nn.Module):
         return self.dropout(x)
 ```
 
+函数型位置编码公式如下：
 
+![公式](pics/公式.jpg)
+
+> 一种好的位置编码方案需要满足以下几条要求：
+>
+> - 它能为每个时间步输出一个独一无二的编码；
+>
+> - 不同长度的句子之间，任何两个时间步之间的距离应该保持一致；
+> - 模型应该能毫不费力地泛化到更长的句子。它的值应该是有界的；
+> - 它必须是确定性的。
+
+使用函数型位置编码能够得知相对位置，如下图所示：
+
+![position_encoding](pics/position_encoding.png)
+
+使用sin cos函数便来表示便可以得出相对位置信息，结论是两个token距离越远位置量PE的乘积结果越小。使用该方式的缺点在于只知道距离信息而没有方向信息，谁在前谁在后是无从得知的，如下公式所示。
+
+![position_encoding2](pics/position_encoding2.png)
+
+#### Other QAs
+
+1. `x = x + self.pe[:, : x.size(1)].requires_grad_(False)`使用加法来将位置信息添加进input x中是因为位置信息在很大的embedding dimension中只占了很小一部分，这一小部分也很容易被transformers分离出来。
+2. 位置信息之所以不因为进入更高层而损失是通过残余连接来保证的。
 
 ## Full Model
 
