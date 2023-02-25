@@ -17,10 +17,10 @@
 5. [Transformer模型详解（李宏毅版）](https://zhuanlan.zhihu.com/p/338817680)
 6. [详解Self-Attention和Multi-Head Attention](https://imzhanghao.com/2021/09/15/self-attention-multi-head-attention/)
 7. [Transformer代码阅读](http://fancyerii.github.io/2019/03/09/transformer-codes/)
-
 8. [面经：什么是Transformer位置编码？](https://zhuanlan.zhihu.com/p/398457641)
 9. [Transformer Architecture: The Positional Encoding](https://kazemnejad.com/blog/transformer_architecture_positional_encoding/)
 10. [Linear Relationships in the Transformer’s Positional Encoding](https://timodenk.com/blog/linear-relationships-in-the-transformers-positional-encoding/)
+10. [【Transformer】10分钟学会Transformer | Pytorch代码讲解 | 代码可运行](https://zhuanlan.zhihu.com/p/403433120)
 
 
 
@@ -571,17 +571,20 @@ class PositionalEncoding(nn.Module):
         self.dropout = nn.Dropout(p=dropout)
 
         # Compute the positional encodings once in log space.
-        pe = torch.zeros(max_len, d_model)
-        position = torch.arange(0, max_len).unsqueeze(1)
+        pe = torch.zeros(max_len, d_model) # ([max_len, d_model])
+        position = torch.arange(0, max_len).unsqueeze(1)  # ([max_len, 1])
         div_term = torch.exp(
             torch.arange(0, d_model, 2) * -(math.log(10000.0) / d_model)
-        )
-        pe[:, 0::2] = torch.sin(position * div_term)
-        pe[:, 1::2] = torch.cos(position * div_term)
-        pe = pe.unsqueeze(0)
+        ) # ([d_model/2])
+        # (position * div_term).shape : ([max_len, d_model/2])
+        pe[:, 0::2] = torch.sin(position * div_term) # 从0开始每隔两列，即偶数列
+        pe[:, 1::2] = torch.cos(position * div_term) # 从1开始，即奇数列
+        pe = pe.unsqueeze(0) # ([1, max_len, d_model])
         self.register_buffer("pe", pe)
 
     def forward(self, x):
+        # self.pe[:, : x.size(1)] shape: ([1, x.size(1), 24])
+        # 第一维利用广播，最后一维d_model不变，只改变中间squence_length的实际长度
         x = x + self.pe[:, : x.size(1)].requires_grad_(False)
         return self.dropout(x)
 ```
