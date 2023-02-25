@@ -4,8 +4,6 @@
 
 ​																																										-- 2023.2
 
-​																																										仇隽
-
 本篇文章基于[annotated-transformer](http://nlp.seas.harvard.edu/annotated-transformer/)的第一部分Model Architecture所做的笔记。
 
 ## 参考文献
