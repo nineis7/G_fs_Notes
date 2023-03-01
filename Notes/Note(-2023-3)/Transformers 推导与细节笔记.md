@@ -4,7 +4,7 @@
 
 ​																																										-- 2023.2
 
-本篇文章基于[annotated-transformer](http://nlp.seas.harvard.edu/annotated-transformer/)的第一部分Model Architecture所做的笔记。
+本篇文章基于[annotated-transformer](http://nlp.seas.harvard.edu/annotated-transformer/)的第一部分Model Architecture所做的综合笔记，代码的实现不止一种，网络上有其他更简明的且易于实现的，可以用以对pre-training过程进行了解。该笔记中的code仅作为一种深入理解model原理和机制的工具，并不作为实际training的code，故该篇文章后面两部分的内容或缺省或由其他笔记补充。
 
 ## 参考文献
 
@@ -37,10 +37,10 @@
 
 #### 模型方面TODO
 
-- [ ] Positional Encoding原理
+- [x] Positional Encoding原理
 - [x] encoder-decoder整体流程
-- [ ] LN、dropout、resnet paper reading
-- [ ] model training part
+- [x] LN、dropout、resnet paper reading
+- [x] model training part
 - [ ] 李宏毅课
 
 
@@ -325,7 +325,7 @@ class DecoderLayer(nn.Module):
         return self.sublayer[2](x, self.feed_forward)
 ```
 
-添加mask和偏移（offset）机制有效保证了预测位置i时只依据位置i前面的信息而不提前预知后面位置的信息。如图所示，每一行代表当前mask，例如对于位置0，mask[0]只有自身信息有用，而越到后面可知信息越多，以此形成正三角的形状。
+添加mask有效保证了预测位置i时只依据位置i前面的信息而不提前预知后面位置的信息。如图所示，每一行代表当前mask，例如对于位置0，mask[0]只有自身信息有用，而越到后面可知信息越多，以此形成正三角的形状。
 
 ![mask](pics/mask.png)
 
@@ -348,6 +348,10 @@ triu function 返回上三角矩阵，再通过`subsequent_mask == 0`进行01反
 0 0 0 0 1                                       1 1 1 1 0
 0 0 0 0 0                                       1 1 1 1 1
 ```
+
+mask的构建还有其他方式，参考GPT note中的colab course。mask仅作为自回归属性的实现，在cross-attention（即layer[1]）那里便不需要加mask，因为此时需要KV也就是目标语言表示的所有信息。
+
+偏移（offset）机制是为自回归提供ground_truth，也就是从起始符<\s>开始自回归预测。举例来说便是通过右移(shifted right)将给定squenece“I like bananas”变成“<\s> I like”。
 
 ## Attention
 
@@ -512,8 +516,6 @@ class MultiHeadedAttention(nn.Module):
 
 由transformers结构图可以看到，多头注意力机制在三处有使用，分别是encoder的layer[0]和decoder的layer[0]和layer[1]，其中encoder的layer[0]的QKV来自同一地方，decoder的layer[0]同样如此，不过添加了mask机制来保留自回归性质；decoder的layer[1]也即“encoder-decoder attention” layers，Q来自于decoder的layer[0]，而memory KV来自encoder的输出。
 
-~~“encoder-decoder attention” layers如此设计我想便跟它命名有关，encoder层做的是分析作用，其中有效的部分在于KV，能够很好的反映inputs间的联系，而decoder层自回归产生的Q。**<u>设计缘由TODO</u>**~~
-
 ## Position-wise Feed-Forward Networks
 
 Position-wise Feed-Forward Networks，即基于位置的前馈网络。
@@ -612,7 +614,16 @@ class PositionalEncoding(nn.Module):
 #### Other QAs
 
 1. `x = x + self.pe[:, : x.size(1)].requires_grad_(False)`使用加法来将位置信息添加进input x中是因为位置信息在很大的embedding dimension中只占了很小一部分，这一小部分也很容易被transformers分离出来。
-2. 位置信息之所以不因为进入更高层而损失是通过残余连接来保证的。
+2. 位置信息之所以不因为进入更高层而损失是通过残余连接来保证的，残余连接也是为了当model变得deeper后loss accuracy达到饱和，通过添加该机制能够更好的进行训练。
+2. positional encoding还有其他方式，如直接调用transformer.wpe
+
+```python
+from transformers import GPT2LMHeadModel
+
+model = GPT2LMHeadModel.from_pretrained('gpt2')  # or any other checkpoint
+word_embeddings = model.transformer.wte.weight  # Word Token Embeddings 
+position_embeddings = model.transformer.wpe.weight  # Word Position Embeddings 
+```
 
 ## Full Model
 
@@ -661,8 +672,16 @@ def make_model(
 
 ![transformer_decoding_2](pics/transformer_decoding_2.gif)
 
+### 后续
 
+1. 对于transformers结构，近来并没有太多的变动，但有一处进行了变动，即将layerNorm从attention的后面提到了前面，也就是pre-norm formulation；
+2. dropout加在linear的后面，也可以加在softmax的后面；
 
-## 维度笔记
+3. encoder做的是对目标语言的解码工作，decoder是自回归，基于相同的语言逐字生成和预测；
+4. self-attention是decoder中的layer[0]，self即QKV都来自于input x，而layer[1]名为cross-attention，其KV均来自另一个output（encoder的output，即对应目标语言的编码表示），而Q来自于input x。
 
-![维度笔记](pics/维度笔记.jpg)
+5. chatGPT的pre-training工作即对应给定文本，进行大量训练；fine-tuning的过程是chatGPT website上给的：
+
+![chatGPT_finetuning](pics/GPT-frontend/chatGPT_finetuning.png)
+
+通过监督学习，强化学习等方式进行微调，微调将model的功能从document completer变成针对具体任务。

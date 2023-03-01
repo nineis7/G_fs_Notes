@@ -27,7 +27,16 @@ update 2023 2-22
 - [ ] Bert model学习（model类学习）
 - [ ] Dive into Deep Learning Compiler 课程跟进（tvm类课程）
 - [ ] 机器学习编译二刷和笔记整理（tvm类课程）
-- [ ] AI编译器原理课程（系统性过一遍，对背景有大致了解）
+- [x] AI编译器原理课程（系统性过一遍，对背景有大致了解）
+
+
+
+科研工作：
+
+week1：
+
+- [ ] minGPT加载进tvm前端，观察model和tvm最新pass对model进行的update；
+- [ ] 阅读GPT相关论文，了解minGPT架构与代码
 
 
 
