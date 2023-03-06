@@ -349,7 +349,7 @@ triu function 返回上三角矩阵，再通过`subsequent_mask == 0`进行01反
 0 0 0 0 0                                       1 1 1 1 1
 ```
 
-mask的构建还有其他方式，参考GPT note中的colab course。mask仅作为自回归属性的实现，在cross-attention（即layer[1]）那里便不需要加mask，因为此时需要KV也就是目标语言表示的所有信息。
+mask的构建还有其他方式，参考GPT note中的colab course，例如先将future position设为-inf再通过softmax归一化形成mask矩阵。mask仅作为自回归属性的实现，在cross-attention（即layer[1]）那里便不需要加mask，因为此时需要KV也就是目标语言表示的所有信息。
 
 偏移（offset）机制是为自回归提供ground_truth，也就是从起始符<\s>开始自回归预测。举例来说便是通过右移(shifted right)将给定squenece“I like bananas”变成“<\s> I like”。
 
@@ -624,6 +624,8 @@ model = GPT2LMHeadModel.from_pretrained('gpt2')  # or any other checkpoint
 word_embeddings = model.transformer.wte.weight  # Word Token Embeddings 
 position_embeddings = model.transformer.wpe.weight  # Word Position Embeddings 
 ```
+
+4. 在GPT中，作者对position embedding矩阵进行随机初始化，并让模型自己学习，而不是采用正弦余弦函数进行计算。
 
 ## Full Model
 

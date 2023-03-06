@@ -39,6 +39,10 @@
 - [x] vscode源代码上传git提交测试
 
   已成功，速度很快，省去了命令行操作
+  
+- [x] 无法在WSL内使用cuda
+
+  通过docker-gpu生成带cuda的docker环境
 
 
 
@@ -213,3 +217,9 @@ tensor([[1.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000],
 xbow3 = wei @ x
 torch.allclose(xbow, xbow3)
 ```
+
+### GPT
+
+- GPT 最大的问题就是传统的语言模型是单向的；我们根据之前的历史来预测当前词。但是我们不能利用后面的信息。比如句子 The animal didn’t cross the street because it was too tired。我们在编码 it 的语义的时候需要同时利用前后的信息，因为在这个句子中，it 可能指代 animal 也可能指代 street。根据 tired，我们推断它指代的是 animal。但是如果把 tired 改成 wide，那么 it 就是指代 street 了。Transformer 的 Self-Attention 理论上是可以同时关注到这两个词的，但是根据前面的介绍，为了使用 Transformer 学习语言模型，必须用 Mask 来让它看不到未来的信息，所以它也不能解决这个问题。
+- GPT在tvm前端优化无需进行微调，只需要测试pre-trained model在优化前和优化后的inference时间即可。
+- 线性增加loss需要指数增加计算量、数据量

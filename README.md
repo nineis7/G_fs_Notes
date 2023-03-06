@@ -40,13 +40,24 @@ week1：
 
 
 
-关于AI compiler方面的系统书籍资料整理：
+系统书籍资料视频整理：
 
-- [【AI编译器原理】系列来啦！我们要从入门到放弃！ - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv21242696?spm_id_from=333.999.0.0)
-- [Dive into Deep Learning Compiler — Dive into Deep Learning Compiler 0.1 documentation (d2l.ai)](https://tvm.d2l.ai/index.html)
+#### TVM
+
 - [机器学习编译 — 机器学习编译 0.0.1 documentation (mlc.ai)](https://mlc.ai/zh/index.html)
 - [BBuf/tvm_mlir_learn: tvm learn (github.com)](https://github.com/BBuf/tvm_mlir_learn)
+- [陈天奇MLC course](https://space.bilibili.com/1663273796/channel/collectiondetail?sid=499979)
+- [Dive into Deep Learning Compiler (d2l.ai)](http://tvm.d2l.ai/d2l-tvm.pdf)
+- [ Apache TVM 中文站 (hyper.ai)](https://tvm.hyper.ai/)
+
+#### AI compiler
+
+- [【AI编译器原理】系列来啦！我们要从入门到放弃！ - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv21242696?spm_id_from=333.999.0.0)
+- [机器学习系统：设计和实现 — 机器学习系统：设计和实现 1.0.0 documentation (openmlsys.github.io)](https://openmlsys.github.io/)
+- [了解/从事机器学习/深度学习系统相关的研究需要什么样的知识结构？ - 知乎 (zhihu.com)](https://www.zhihu.com/question/315611053)
+
+#### Deep Learning
+
 - 《用Python实现深度学习框架》（框架类）
 - 《深入理解神经网络——从逻辑回归到CNN》（deep learning基础类）
 - 《深度学习》（花书）（deep learning进阶类）
-- 

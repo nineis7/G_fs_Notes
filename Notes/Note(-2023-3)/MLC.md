@@ -81,7 +81,67 @@ trace记录了之前所作的所有变换操作
 
 程序变换方式之一：随机变换，通过loop来将搜索空间内可能全部算出结果，求出最优解；
 
+#### PyTorch图向IRModule的转换
 
+针对PyTorch图中节点信息逐一依据拓扑排序分类转换：
+
+```python
+def from_fx(fx_mod, input_shapes, call_function_map, call_module_map):
+    input_index = 0
+    node_map = {}
+    named_modules = dict(fx_mod.named_modules())
+    # 例如nn.Linear，nn.ReLU
+
+    bb = relax.BlockBuilder()
+
+    fn_inputs = []
+    fn_output = None
+    with bb.function("main"):
+        with bb.dataflow():
+            for node in fx_mod.graph.nodes:
+            # node的遍历顺序是遍历拓扑排序形成的数组，故访问和重新放入node_map的过程不改变拓扑顺序
+                if node.op == "placeholder":
+                    # create input placeholder
+                    shape = input_shapes[input_index]
+                    input_index += 1
+                    input_var = relax.Var(
+                        node.target, shape, relax.DynTensorType(len(shape), "float32")
+                    )
+                    fn_inputs.append(input_var)
+                    node_map[node] = input_var
+                elif node.op == "get_attr":
+                    node_map[node] = map_param(fetch_attr(fx_mod, node.target))
+                elif node.op == "call_function":
+                    # call_function_map相当于function list，call_function_map[node.target]即function_name，(bb, node_map, node)即该function的参数，call_module_map同理。
+                    node_map[node] = call_function_map[node.target](bb, node_map, node)
+                elif node.op == "call_module":
+                    named_module = named_modules[node.target]
+                    node_map[node] = call_module_map[type(named_module)](bb, node_map, node, named_module)
+                elif node.op == "output":
+                    output = node_map[node.args[0]]
+                    assert fn_output is None
+                    fn_output = bb.emit_output(output)
+        # output and finalize the function
+        bb.emit_func_output(output, fn_inputs)
+    return bb.get()
+```
+
+IRModule的数据结构如下所示：这是一个function所包含的内容，其中VarBinding仍然可以细分：
+
+```python
+binding.var
+=>  relax.expr.DataflowVar(0x55d919383d90)
+
+# 为了在一行显示，Var内值省略
+binding.value
+=>  CallNode(Op(relax.multiply), [relax.expr.Var(...), relax.expr.Var(...)], (nullptr), [])
+```
+
+其中CallNode为调用节点，Op(relax.multiply)为操作，后面为参数列表
+
+![IRModule_structure](pics/MLC/IRModule_structure.png)
+
+visit pattern 设计模式
 
 # AI编译器原理
 
