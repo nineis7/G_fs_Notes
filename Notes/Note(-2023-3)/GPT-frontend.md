@@ -44,7 +44,7 @@
 
   通过docker-gpu生成带cuda的docker环境
 
-
+- [ ] nvcc fatal: Unsupported gpu architecture 'compute_86'
 
 ## 笔记
 
