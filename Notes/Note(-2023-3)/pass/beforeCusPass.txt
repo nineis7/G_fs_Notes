@@ -1,0 +1,43 @@
+def @main(%input: Tensor[(1, 416, 416, 3), float32]) -> Tensor[(1, 13, 13, 30), float32] {
+  %0 = nn.pad(%input, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 418, 418, 3), float32] */;
+  %1 = nn.conv2d(%0, meta[relay.Constant][0] /* ty=Tensor[(3, 3, 3, 16), float32] */ /* ty=Tensor[(3, 3, 3, 16), float32] */, channels=16, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 416, 416, 16), float32] */;
+  %2 = add(%1, meta[relay.Constant][1] /* ty=Tensor[(16), float32] */ /* ty=Tensor[(16), float32] */) /* ty=Tensor[(1, 416, 416, 16), float32] */;
+  %3 = nn.leaky_relu(%2, alpha=0.125f) /* ty=Tensor[(1, 416, 416, 16), float32] */;
+  %4 = nn.max_pool2d(%3, pool_size=[2, 2], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC") /* ty=Tensor[(1, 208, 208, 16), float32] */;
+  %5 = nn.pad(%4, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 210, 210, 16), float32] */;
+  %6 = nn.conv2d(%5, meta[relay.Constant][2] /* ty=Tensor[(3, 3, 16, 32), float32] */ /* ty=Tensor[(3, 3, 16, 32), float32] */, channels=32, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 208, 208, 32), float32] */;
+  %7 = add(%6, meta[relay.Constant][3] /* ty=Tensor[(32), float32] */ /* ty=Tensor[(32), float32] */) /* ty=Tensor[(1, 208, 208, 32), float32] */;
+  %8 = nn.leaky_relu(%7, alpha=0.125f) /* ty=Tensor[(1, 208, 208, 32), float32] */;
+  %9 = nn.max_pool2d(%8, pool_size=[2, 2], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC") /* ty=Tensor[(1, 104, 104, 32), float32] */;
+  %10 = nn.pad(%9, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 106, 106, 32), float32] */;
+  %11 = nn.conv2d(%10, meta[relay.Constant][4] /* ty=Tensor[(3, 3, 32, 64), float32] */ /* ty=Tensor[(3, 3, 32, 64), float32] */, channels=64, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 104, 104, 64), float32] */;
+  %12 = add(%11, meta[relay.Constant][5] /* ty=Tensor[(64), float32] */ /* ty=Tensor[(64), float32] */) /* ty=Tensor[(1, 104, 104, 64), float32] */;
+  %13 = nn.leaky_relu(%12, alpha=0.125f) /* ty=Tensor[(1, 104, 104, 64), float32] */;
+  %14 = nn.max_pool2d(%13, pool_size=[2, 2], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC") /* ty=Tensor[(1, 52, 52, 64), float32] */;
+  %15 = nn.pad(%14, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 54, 54, 64), float32] */;
+  %16 = nn.conv2d(%15, meta[relay.Constant][6] /* ty=Tensor[(3, 3, 64, 128), float32] */ /* ty=Tensor[(3, 3, 64, 128), float32] */, channels=128, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 52, 52, 128), float32] */;
+  %17 = add(%16, meta[relay.Constant][7] /* ty=Tensor[(128), float32] */ /* ty=Tensor[(128), float32] */) /* ty=Tensor[(1, 52, 52, 128), float32] */;
+  %18 = nn.leaky_relu(%17, alpha=0.125f) /* ty=Tensor[(1, 52, 52, 128), float32] */;
+  %19 = nn.max_pool2d(%18, pool_size=[2, 2], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC") /* ty=Tensor[(1, 26, 26, 128), float32] */;
+  %20 = nn.pad(%19, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 28, 28, 128), float32] */;
+  %21 = nn.conv2d(%20, meta[relay.Constant][8] /* ty=Tensor[(3, 3, 128, 256), float32] */ /* ty=Tensor[(3, 3, 128, 256), float32] */, channels=256, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 26, 26, 256), float32] */;
+  %22 = add(%21, meta[relay.Constant][9] /* ty=Tensor[(256), float32] */ /* ty=Tensor[(256), float32] */) /* ty=Tensor[(1, 26, 26, 256), float32] */;
+  %23 = nn.leaky_relu(%22, alpha=0.125f) /* ty=Tensor[(1, 26, 26, 256), float32] */;
+  %24 = nn.max_pool2d(%23, pool_size=[2, 2], strides=[2, 2], padding=[0, 0, 0, 0], layout="NHWC") /* ty=Tensor[(1, 13, 13, 256), float32] */;
+  %25 = nn.pad(%24, pad_width=[[0, 0], [1, 2], [1, 2], [0, 0]]) /* ty=Tensor[(1, 16, 16, 256), float32] */;
+  %26 = nn.conv2d(%25, meta[relay.Constant][10] /* ty=Tensor[(3, 3, 256, 512), float32] */ /* ty=Tensor[(3, 3, 256, 512), float32] */, channels=512, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 14, 14, 512), float32] */;
+  %27 = add(%26, meta[relay.Constant][11] /* ty=Tensor[(512), float32] */ /* ty=Tensor[(512), float32] */) /* ty=Tensor[(1, 14, 14, 512), float32] */;
+  %28 = nn.leaky_relu(%27, alpha=0.125f) /* ty=Tensor[(1, 14, 14, 512), float32] */;
+  %29 = nn.max_pool2d(%28, pool_size=[2, 2], layout="NHWC") /* ty=Tensor[(1, 13, 13, 512), float32] */;
+  %30 = nn.pad(%29, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 15, 15, 512), float32] */;
+  %31 = nn.conv2d(%30, meta[relay.Constant][12] /* ty=Tensor[(3, 3, 512, 1024), float32] */ /* ty=Tensor[(3, 3, 512, 1024), float32] */, channels=1024, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 13, 13, 1024), float32] */;
+  %32 = add(%31, meta[relay.Constant][13] /* ty=Tensor[(1024), float32] */ /* ty=Tensor[(1024), float32] */) /* ty=Tensor[(1, 13, 13, 1024), float32] */;
+  %33 = nn.leaky_relu(%32, alpha=0.125f) /* ty=Tensor[(1, 13, 13, 1024), float32] */;
+  %34 = nn.pad(%33, pad_width=[[0, 0], [1, 1], [1, 1], [0, 0]]) /* ty=Tensor[(1, 15, 15, 1024), float32] */;
+  %35 = nn.conv2d(%34, meta[relay.Constant][14] /* ty=Tensor[(3, 3, 1024, 1024), float32] */ /* ty=Tensor[(3, 3, 1024, 1024), float32] */, channels=1024, kernel_size=[3, 3], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 13, 13, 1024), float32] */;
+  %36 = add(%35, meta[relay.Constant][15] /* ty=Tensor[(1024), float32] */ /* ty=Tensor[(1024), float32] */) /* ty=Tensor[(1, 13, 13, 1024), float32] */;
+  %37 = nn.leaky_relu(%36, alpha=0.125f) /* ty=Tensor[(1, 13, 13, 1024), float32] */;
+  %38 = nn.pad(%37, pad_width=[[0, 0], [0, 0], [0, 0], [0, 0]]) /* ty=Tensor[(1, 13, 13, 1024), float32] */;
+  %39 = nn.conv2d(%38, meta[relay.Constant][16] /* ty=Tensor[(1, 1, 1024, 30), float32] */ /* ty=Tensor[(1, 1, 1024, 30), float32] */, channels=30, kernel_size=[1, 1], data_layout="NHWC", kernel_layout="HWIO") /* ty=Tensor[(1, 13, 13, 30), float32] */;
+  add(%39, meta[relay.Constant][17] /* ty=Tensor[(30), float32] */ /* ty=Tensor[(30), float32] */) /* ty=Tensor[(1, 13, 13, 30), float32] */
+}

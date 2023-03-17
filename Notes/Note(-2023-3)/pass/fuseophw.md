@@ -1,7 +1,9 @@
 # fuse_op_hw Pass HW算子融合逻辑
 
+2022-12
 
 ## 总貌
+
 tvm前端解析出来网络module并转化为Relay IR后，fuse_op_hw Pass做了以下几件事：
 
 ```mermaid
