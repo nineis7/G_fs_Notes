@@ -1,4 +1,4 @@
-# nndl总笔记
+# nndl-exer笔记
 
 ## chap2 线性回归
 
