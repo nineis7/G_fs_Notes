@@ -86,7 +86,7 @@ for j in range(training_loop):
 
 【多项式 + 梯度下降】
 
-
+ERROR：出现问题，目前只能使用高斯和identity_basis
 
 【高斯 + 梯度下降】training_loop：10000 ，标准差：1.1
 
@@ -95,3 +95,8 @@ for j in range(training_loop):
 【高斯 + 梯度下降】training_loop：100000 ，标准差：0.4
 
 ![output_multi&gd-100000](Notes/nndl/output_multi&gd-100000.png)
+
+
+
+## Chap3 线性模型
+
