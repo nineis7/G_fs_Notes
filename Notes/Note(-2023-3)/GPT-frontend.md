@@ -40,11 +40,13 @@
 
   已成功，速度很快，省去了命令行操作
   
-- [x] 无法在WSL内使用cuda
+- [ ] 无法在WSL内使用cuda
 
-  通过docker-gpu生成带cuda的docker环境
+  通过docker-gpu生成带cuda的docker环境，但失败
 
 - [ ] nvcc fatal: Unsupported gpu architecture 'compute_86'
+
+- [x] 以上两个问题均来源于docker cuda环境配置报错，问题完全解决方案见[tvm docker cuda环境配置.md]文件。
 
 ## 笔记
 
