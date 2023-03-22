@@ -1,0 +1,1003 @@
+type List[A] {
+  Cons(A, List[A]),
+  Nil,
+}
+
+type Option[A] {
+  Some(A),
+  None,
+}
+
+type Tree[A] {
+  Rose(A, List[Tree[A]]),
+}
+
+type tensor_float16_t {
+  tensor_nil_float16,
+  tensor0_float16(float16),
+  tensor1_float16(Tensor[(?), float16]),
+  tensor2_float16(Tensor[(?, ?), float16]),
+  tensor3_float16(Tensor[(?, ?, ?), float16]),
+  tensor4_float16(Tensor[(?, ?, ?, ?), float16]),
+  tensor5_float16(Tensor[(?, ?, ?, ?, ?), float16]),
+  tensor6_float16(Tensor[(?, ?, ?, ?, ?, ?), float16]),
+}
+
+type tensor_float32_t {
+  tensor_nil_float32,
+  tensor0_float32(float32),
+  tensor1_float32(Tensor[(?), float32]),
+  tensor2_float32(Tensor[(?, ?), float32]),
+  tensor3_float32(Tensor[(?, ?, ?), float32]),
+  tensor4_float32(Tensor[(?, ?, ?, ?), float32]),
+  tensor5_float32(Tensor[(?, ?, ?, ?, ?), float32]),
+  tensor6_float32(Tensor[(?, ?, ?, ?, ?, ?), float32]),
+}
+
+type tensor_float64_t {
+  tensor_nil_float64,
+  tensor0_float64(float64),
+  tensor1_float64(Tensor[(?), float64]),
+  tensor2_float64(Tensor[(?, ?), float64]),
+  tensor3_float64(Tensor[(?, ?, ?), float64]),
+  tensor4_float64(Tensor[(?, ?, ?, ?), float64]),
+  tensor5_float64(Tensor[(?, ?, ?, ?, ?), float64]),
+  tensor6_float64(Tensor[(?, ?, ?, ?, ?, ?), float64]),
+}
+
+type tensor_int16_t {
+  tensor_nil_int16,
+  tensor0_int16(int16),
+  tensor1_int16(Tensor[(?), int16]),
+  tensor2_int16(Tensor[(?, ?), int16]),
+  tensor3_int16(Tensor[(?, ?, ?), int16]),
+  tensor4_int16(Tensor[(?, ?, ?, ?), int16]),
+  tensor5_int16(Tensor[(?, ?, ?, ?, ?), int16]),
+  tensor6_int16(Tensor[(?, ?, ?, ?, ?, ?), int16]),
+}
+
+type tensor_int32_t {
+  tensor_nil_int32,
+  tensor0_int32(int32),
+  tensor1_int32(Tensor[(?), int32]),
+  tensor2_int32(Tensor[(?, ?), int32]),
+  tensor3_int32(Tensor[(?, ?, ?), int32]),
+  tensor4_int32(Tensor[(?, ?, ?, ?), int32]),
+  tensor5_int32(Tensor[(?, ?, ?, ?, ?), int32]),
+  tensor6_int32(Tensor[(?, ?, ?, ?, ?, ?), int32]),
+}
+
+type tensor_int64_t {
+  tensor_nil_int64,
+  tensor0_int64(int64),
+  tensor1_int64(Tensor[(?), int64]),
+  tensor2_int64(Tensor[(?, ?), int64]),
+  tensor3_int64(Tensor[(?, ?, ?), int64]),
+  tensor4_int64(Tensor[(?, ?, ?, ?), int64]),
+  tensor5_int64(Tensor[(?, ?, ?, ?, ?), int64]),
+  tensor6_int64(Tensor[(?, ?, ?, ?, ?, ?), int64]),
+}
+
+type tensor_int8_t {
+  tensor_nil_int8,
+  tensor0_int8(int8),
+  tensor1_int8(Tensor[(?), int8]),
+  tensor2_int8(Tensor[(?, ?), int8]),
+  tensor3_int8(Tensor[(?, ?, ?), int8]),
+  tensor4_int8(Tensor[(?, ?, ?, ?), int8]),
+  tensor5_int8(Tensor[(?, ?, ?, ?, ?), int8]),
+  tensor6_int8(Tensor[(?, ?, ?, ?, ?, ?), int8]),
+}
+
+type tensor_uint16_t {
+  tensor_nil_uint16,
+  tensor0_uint16(uint16),
+  tensor1_uint16(Tensor[(?), uint16]),
+  tensor2_uint16(Tensor[(?, ?), uint16]),
+  tensor3_uint16(Tensor[(?, ?, ?), uint16]),
+  tensor4_uint16(Tensor[(?, ?, ?, ?), uint16]),
+  tensor5_uint16(Tensor[(?, ?, ?, ?, ?), uint16]),
+  tensor6_uint16(Tensor[(?, ?, ?, ?, ?, ?), uint16]),
+}
+
+type tensor_uint8_t {
+  tensor_nil_uint8,
+  tensor0_uint8(uint8),
+  tensor1_uint8(Tensor[(?), uint8]),
+  tensor2_uint8(Tensor[(?, ?), uint8]),
+  tensor3_uint8(Tensor[(?, ?, ?), uint8]),
+  tensor4_uint8(Tensor[(?, ?, ?, ?), uint8]),
+  tensor5_uint8(Tensor[(?, ?, ?, ?, ?), uint8]),
+  tensor6_uint8(Tensor[(?, ?, ?, ?, ?, ?), uint8]),
+}
+
+def @main(%input_ids: Tensor[(16, 512), int64], %tokens_embed.weight: Tensor[(40478, 768), float32], %positions_embed.weight: Tensor[(512, 768), float32], %position_ids: Tensor[(512), int64], %h.0.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.0.attn.c_attn.bias: Tensor[(2304), float32], %h.0.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.0.attn.c_proj.weight: Tensor[(768, 768), float32], %h.0.attn.c_proj.bias: Tensor[(768), float32], %h.0.ln_1.weight: Tensor[(768), float32], %h.0.ln_1.bias: Tensor[(768), float32], %h.0.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.0.mlp.c_fc.bias: Tensor[(3072), float32], %h.0.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.0.mlp.c_proj.bias: Tensor[(768), float32], %h.0.ln_2.weight: Tensor[(768), float32], %h.0.ln_2.bias: Tensor[(768), float32], %h.1.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.1.attn.c_attn.bias: Tensor[(2304), float32], %h.1.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.1.attn.c_proj.weight: Tensor[(768, 768), float32], %h.1.attn.c_proj.bias: Tensor[(768), float32], %h.1.ln_1.weight: Tensor[(768), float32], %h.1.ln_1.bias: Tensor[(768), float32], %h.1.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.1.mlp.c_fc.bias: Tensor[(3072), float32], %h.1.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.1.mlp.c_proj.bias: Tensor[(768), float32], %h.1.ln_2.weight: Tensor[(768), float32], %h.1.ln_2.bias: Tensor[(768), float32], %h.2.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.2.attn.c_attn.bias: Tensor[(2304), float32], %h.2.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.2.attn.c_proj.weight: Tensor[(768, 768), float32], %h.2.attn.c_proj.bias: Tensor[(768), float32], %h.2.ln_1.weight: Tensor[(768), float32], %h.2.ln_1.bias: Tensor[(768), float32], %h.2.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.2.mlp.c_fc.bias: Tensor[(3072), float32], %h.2.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.2.mlp.c_proj.bias: Tensor[(768), float32], %h.2.ln_2.weight: Tensor[(768), float32], %h.2.ln_2.bias: Tensor[(768), float32], %h.3.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.3.attn.c_attn.bias: Tensor[(2304), float32], %h.3.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.3.attn.c_proj.weight: Tensor[(768, 768), float32], %h.3.attn.c_proj.bias: Tensor[(768), float32], %h.3.ln_1.weight: Tensor[(768), float32], %h.3.ln_1.bias: Tensor[(768), float32], %h.3.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.3.mlp.c_fc.bias: Tensor[(3072), float32], %h.3.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.3.mlp.c_proj.bias: Tensor[(768), float32], %h.3.ln_2.weight: Tensor[(768), float32], %h.3.ln_2.bias: Tensor[(768), float32], %h.4.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.4.attn.c_attn.bias: Tensor[(2304), float32], %h.4.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.4.attn.c_proj.weight: Tensor[(768, 768), float32], %h.4.attn.c_proj.bias: Tensor[(768), float32], %h.4.ln_1.weight: Tensor[(768), float32], %h.4.ln_1.bias: Tensor[(768), float32], %h.4.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.4.mlp.c_fc.bias: Tensor[(3072), float32], %h.4.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.4.mlp.c_proj.bias: Tensor[(768), float32], %h.4.ln_2.weight: Tensor[(768), float32], %h.4.ln_2.bias: Tensor[(768), float32], %h.5.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.5.attn.c_attn.bias: Tensor[(2304), float32], %h.5.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.5.attn.c_proj.weight: Tensor[(768, 768), float32], %h.5.attn.c_proj.bias: Tensor[(768), float32], %h.5.ln_1.weight: Tensor[(768), float32], %h.5.ln_1.bias: Tensor[(768), float32], %h.5.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.5.mlp.c_fc.bias: Tensor[(3072), float32], %h.5.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.5.mlp.c_proj.bias: Tensor[(768), float32], %h.5.ln_2.weight: Tensor[(768), float32], %h.5.ln_2.bias: Tensor[(768), float32], %h.6.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.6.attn.c_attn.bias: Tensor[(2304), float32], %h.6.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.6.attn.c_proj.weight: Tensor[(768, 768), float32], %h.6.attn.c_proj.bias: Tensor[(768), float32], %h.6.ln_1.weight: Tensor[(768), float32], %h.6.ln_1.bias: Tensor[(768), float32], %h.6.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.6.mlp.c_fc.bias: Tensor[(3072), float32], %h.6.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.6.mlp.c_proj.bias: Tensor[(768), float32], %h.6.ln_2.weight: Tensor[(768), float32], %h.6.ln_2.bias: Tensor[(768), float32], %h.7.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.7.attn.c_attn.bias: Tensor[(2304), float32], %h.7.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.7.attn.c_proj.weight: Tensor[(768, 768), float32], %h.7.attn.c_proj.bias: Tensor[(768), float32], %h.7.ln_1.weight: Tensor[(768), float32], %h.7.ln_1.bias: Tensor[(768), float32], %h.7.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.7.mlp.c_fc.bias: Tensor[(3072), float32], %h.7.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.7.mlp.c_proj.bias: Tensor[(768), float32], %h.7.ln_2.weight: Tensor[(768), float32], %h.7.ln_2.bias: Tensor[(768), float32], %h.8.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.8.attn.c_attn.bias: Tensor[(2304), float32], %h.8.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.8.attn.c_proj.weight: Tensor[(768, 768), float32], %h.8.attn.c_proj.bias: Tensor[(768), float32], %h.8.ln_1.weight: Tensor[(768), float32], %h.8.ln_1.bias: Tensor[(768), float32], %h.8.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.8.mlp.c_fc.bias: Tensor[(3072), float32], %h.8.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.8.mlp.c_proj.bias: Tensor[(768), float32], %h.8.ln_2.weight: Tensor[(768), float32], %h.8.ln_2.bias: Tensor[(768), float32], %h.9.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.9.attn.c_attn.bias: Tensor[(2304), float32], %h.9.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.9.attn.c_proj.weight: Tensor[(768, 768), float32], %h.9.attn.c_proj.bias: Tensor[(768), float32], %h.9.ln_1.weight: Tensor[(768), float32], %h.9.ln_1.bias: Tensor[(768), float32], %h.9.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.9.mlp.c_fc.bias: Tensor[(3072), float32], %h.9.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.9.mlp.c_proj.bias: Tensor[(768), float32], %h.9.ln_2.weight: Tensor[(768), float32], %h.9.ln_2.bias: Tensor[(768), float32], %h.10.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.10.attn.c_attn.bias: Tensor[(2304), float32], %h.10.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.10.attn.c_proj.weight: Tensor[(768, 768), float32], %h.10.attn.c_proj.bias: Tensor[(768), float32], %h.10.ln_1.weight: Tensor[(768), float32], %h.10.ln_1.bias: Tensor[(768), float32], %h.10.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.10.mlp.c_fc.bias: Tensor[(3072), float32], %h.10.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.10.mlp.c_proj.bias: Tensor[(768), float32], %h.10.ln_2.weight: Tensor[(768), float32], %h.10.ln_2.bias: Tensor[(768), float32], %h.11.attn.c_attn.weight: Tensor[(768, 2304), float32], %h.11.attn.c_attn.bias: Tensor[(2304), float32], %h.11.attn.bias: Tensor[(1, 1, 512, 512), float32], %h.11.attn.c_proj.weight: Tensor[(768, 768), float32], %h.11.attn.c_proj.bias: Tensor[(768), float32], %h.11.ln_1.weight: Tensor[(768), float32], %h.11.ln_1.bias: Tensor[(768), float32], %h.11.mlp.c_fc.weight: Tensor[(768, 3072), float32], %h.11.mlp.c_fc.bias: Tensor[(3072), float32], %h.11.mlp.c_proj.weight: Tensor[(3072, 768), float32], %h.11.mlp.c_proj.bias: Tensor[(768), float32], %h.11.ln_2.weight: Tensor[(768), float32], %h.11.ln_2.bias: Tensor[(768), float32]) {
+  %0 = reshape(%input_ids, newshape=[-1, 512]);
+  %1 = cast(%0, dtype="int32");
+  %2 = expand_dims(%position_ids, axis=0);
+  %3 = strided_slice(%2, begin=[0, 0], end=[1, 512], strides=[1, 1], axes=None);
+  %4 = cast(%3, dtype="int32");
+  %5 = take(%tokens_embed.weight, %1, axis=0);
+  %6 = take(%positions_embed.weight, %4, axis=0);
+  %7 = add(%5, %6);
+  %8 = add(%7, 0f);
+  %9 = nn.dropout(%8, rate=0.1f);
+  %10 = %9.0;
+  %11 = reshape(%10, newshape=[-1, 768]);
+  %12 = transpose(%h.0.attn.c_attn.weight, axes=[1, 0]);
+  %13 = nn.dense(%11, %12, units=2304);
+  %14 = add(%13, %h.0.attn.c_attn.bias);
+  %15 = reshape(%14, newshape=[16, 512, 2304]);
+  %16 = split(%15, indices_or_sections=[768, 1536], axis=2);
+  %17 = %16.0;
+  %18 = reshape(%17, newshape=[16, 512, 12, 64]);
+  %19 = transpose(%18, axes=[0, 2, 1, 3]);
+  %20 = broadcast_to(%19, shape=[16, 12, 512, 64]);
+  %21 = %16.1;
+  %22 = reshape(%21, newshape=[16, 512, 12, 64]);
+  %23 = transpose(%22, axes=[0, 2, 3, 1]);
+  %24 = broadcast_to(%23, shape=[16, 12, 64, 512]);
+  %25 = reshape(%20, newshape=[-1, 512, 64]);
+  %26 = reshape(%24, newshape=[-1, 64, 512]);
+  %27 = nn.batch_matmul(%25, %26);
+  %28 = reshape(%27, newshape=[16, 12, 512, 512]);
+  %29 = squeeze(%28, axis=[]);
+  %30 = strided_slice(%h.0.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %31 = divide(%29, 8f);
+  %32 = strided_slice(%30, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %33 = multiply(1f, %32);
+  %34 = subtract(1f, %33);
+  %35 = multiply(%31, %32);
+  %36 = multiply(%34, -10000f);
+  %37 = add(%35, %36);
+  %38 = nn.softmax(%37);
+  %39 = nn.dropout(%38, rate=0.1f);
+  %40 = %39.0;
+  %41 = broadcast_to(%40, shape=[16, 12, 512, 512]);
+  %42 = %16.2;
+  %43 = reshape(%42, newshape=[16, 512, 12, 64]);
+  %44 = transpose(%43, axes=[0, 2, 1, 3]);
+  %45 = broadcast_to(%44, shape=[16, 12, 512, 64]);
+  %46 = reshape(%41, newshape=[-1, 512, 512]);
+  %47 = reshape(%45, newshape=[-1, 512, 64]);
+  %48 = nn.batch_matmul(%46, %47);
+  %49 = reshape(%48, newshape=[16, 12, 512, 64]);
+  %50 = squeeze(%49, axis=[]);
+  %51 = transpose(%50, axes=[0, 2, 1, 3]);
+  %52 = reshape(%51, newshape=[16, 512, 768]);
+  %53 = reshape(%52, newshape=[-1, 768]);
+  %54 = transpose(%h.0.attn.c_proj.weight, axes=[1, 0]);
+  %55 = nn.dense(%53, %54, units=768);
+  %56 = add(%55, %h.0.attn.c_proj.bias);
+  %57 = reshape(%56, newshape=[16, 512, 768]);
+  %58 = nn.dropout(%57, rate=0.1f);
+  %59 = %58.0;
+  %60 = add(%10, %59);
+  %61 = nn.layer_norm(%60, %h.0.ln_1.weight, %h.0.ln_1.bias);
+  %62 = reshape(%61, newshape=[-1, 768]);
+  %63 = transpose(%h.0.mlp.c_fc.weight, axes=[1, 0]);
+  %64 = nn.dense(%62, %63, units=3072);
+  %65 = add(%64, %h.0.mlp.c_fc.bias);
+  %66 = reshape(%65, newshape=[16, 512, 3072]);
+  %67 = power(%66, 3f);
+  %68 = multiply(%67, 0.044715f);
+  %69 = add(%66, %68);
+  %70 = multiply(%69, 0.797885f);
+  %71 = tanh(%70);
+  %72 = multiply(%66, 0.5f);
+  %73 = add(%71, 1f);
+  %74 = multiply(%72, %73);
+  %75 = reshape(%74, newshape=[-1, 3072]);
+  %76 = transpose(%h.0.mlp.c_proj.weight, axes=[1, 0]);
+  %77 = nn.dense(%75, %76, units=768);
+  %78 = add(%77, %h.0.mlp.c_proj.bias);
+  %79 = reshape(%78, newshape=[16, 512, 768]);
+  %80 = nn.dropout(%79, rate=0.1f);
+  %81 = %80.0;
+  %82 = add(%61, %81);
+  %83 = nn.layer_norm(%82, %h.0.ln_2.weight, %h.0.ln_2.bias);
+  %84 = reshape(%83, newshape=[-1, 768]);
+  %85 = transpose(%h.1.attn.c_attn.weight, axes=[1, 0]);
+  %86 = nn.dense(%84, %85, units=2304);
+  %87 = add(%86, %h.1.attn.c_attn.bias);
+  %88 = reshape(%87, newshape=[16, 512, 2304]);
+  %89 = split(%88, indices_or_sections=[768, 1536], axis=2);
+  %90 = %89.0;
+  %91 = reshape(%90, newshape=[16, 512, 12, 64]);
+  %92 = transpose(%91, axes=[0, 2, 1, 3]);
+  %93 = broadcast_to(%92, shape=[16, 12, 512, 64]);
+  %94 = %89.1;
+  %95 = reshape(%94, newshape=[16, 512, 12, 64]);
+  %96 = transpose(%95, axes=[0, 2, 3, 1]);
+  %97 = broadcast_to(%96, shape=[16, 12, 64, 512]);
+  %98 = reshape(%93, newshape=[-1, 512, 64]);
+  %99 = reshape(%97, newshape=[-1, 64, 512]);
+  %100 = nn.batch_matmul(%98, %99);
+  %101 = reshape(%100, newshape=[16, 12, 512, 512]);
+  %102 = squeeze(%101, axis=[]);
+  %103 = strided_slice(%h.1.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %104 = divide(%102, 8f);
+  %105 = strided_slice(%103, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %106 = multiply(1f, %105);
+  %107 = subtract(1f, %106);
+  %108 = multiply(%104, %105);
+  %109 = multiply(%107, -10000f);
+  %110 = add(%108, %109);
+  %111 = nn.softmax(%110);
+  %112 = nn.dropout(%111, rate=0.1f);
+  %113 = %112.0;
+  %114 = broadcast_to(%113, shape=[16, 12, 512, 512]);
+  %115 = %89.2;
+  %116 = reshape(%115, newshape=[16, 512, 12, 64]);
+  %117 = transpose(%116, axes=[0, 2, 1, 3]);
+  %118 = broadcast_to(%117, shape=[16, 12, 512, 64]);
+  %119 = reshape(%114, newshape=[-1, 512, 512]);
+  %120 = reshape(%118, newshape=[-1, 512, 64]);
+  %121 = nn.batch_matmul(%119, %120);
+  %122 = reshape(%121, newshape=[16, 12, 512, 64]);
+  %123 = squeeze(%122, axis=[]);
+  %124 = transpose(%123, axes=[0, 2, 1, 3]);
+  %125 = reshape(%124, newshape=[16, 512, 768]);
+  %126 = reshape(%125, newshape=[-1, 768]);
+  %127 = transpose(%h.1.attn.c_proj.weight, axes=[1, 0]);
+  %128 = nn.dense(%126, %127, units=768);
+  %129 = add(%128, %h.1.attn.c_proj.bias);
+  %130 = reshape(%129, newshape=[16, 512, 768]);
+  %131 = nn.dropout(%130, rate=0.1f);
+  %132 = %131.0;
+  %133 = add(%83, %132);
+  %134 = nn.layer_norm(%133, %h.1.ln_1.weight, %h.1.ln_1.bias);
+  %135 = reshape(%134, newshape=[-1, 768]);
+  %136 = transpose(%h.1.mlp.c_fc.weight, axes=[1, 0]);
+  %137 = nn.dense(%135, %136, units=3072);
+  %138 = add(%137, %h.1.mlp.c_fc.bias);
+  %139 = reshape(%138, newshape=[16, 512, 3072]);
+  %140 = power(%139, 3f);
+  %141 = multiply(%140, 0.044715f);
+  %142 = add(%139, %141);
+  %143 = multiply(%142, 0.797885f);
+  %144 = tanh(%143);
+  %145 = multiply(%139, 0.5f);
+  %146 = add(%144, 1f);
+  %147 = multiply(%145, %146);
+  %148 = reshape(%147, newshape=[-1, 3072]);
+  %149 = transpose(%h.1.mlp.c_proj.weight, axes=[1, 0]);
+  %150 = nn.dense(%148, %149, units=768);
+  %151 = add(%150, %h.1.mlp.c_proj.bias);
+  %152 = reshape(%151, newshape=[16, 512, 768]);
+  %153 = nn.dropout(%152, rate=0.1f);
+  %154 = %153.0;
+  %155 = add(%134, %154);
+  %156 = nn.layer_norm(%155, %h.1.ln_2.weight, %h.1.ln_2.bias);
+  %157 = reshape(%156, newshape=[-1, 768]);
+  %158 = transpose(%h.2.attn.c_attn.weight, axes=[1, 0]);
+  %159 = nn.dense(%157, %158, units=2304);
+  %160 = add(%159, %h.2.attn.c_attn.bias);
+  %161 = reshape(%160, newshape=[16, 512, 2304]);
+  %162 = split(%161, indices_or_sections=[768, 1536], axis=2);
+  %163 = %162.0;
+  %164 = reshape(%163, newshape=[16, 512, 12, 64]);
+  %165 = transpose(%164, axes=[0, 2, 1, 3]);
+  %166 = broadcast_to(%165, shape=[16, 12, 512, 64]);
+  %167 = %162.1;
+  %168 = reshape(%167, newshape=[16, 512, 12, 64]);
+  %169 = transpose(%168, axes=[0, 2, 3, 1]);
+  %170 = broadcast_to(%169, shape=[16, 12, 64, 512]);
+  %171 = reshape(%166, newshape=[-1, 512, 64]);
+  %172 = reshape(%170, newshape=[-1, 64, 512]);
+  %173 = nn.batch_matmul(%171, %172);
+  %174 = reshape(%173, newshape=[16, 12, 512, 512]);
+  %175 = squeeze(%174, axis=[]);
+  %176 = strided_slice(%h.2.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %177 = divide(%175, 8f);
+  %178 = strided_slice(%176, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %179 = multiply(1f, %178);
+  %180 = subtract(1f, %179);
+  %181 = multiply(%177, %178);
+  %182 = multiply(%180, -10000f);
+  %183 = add(%181, %182);
+  %184 = nn.softmax(%183);
+  %185 = nn.dropout(%184, rate=0.1f);
+  %186 = %185.0;
+  %187 = broadcast_to(%186, shape=[16, 12, 512, 512]);
+  %188 = %162.2;
+  %189 = reshape(%188, newshape=[16, 512, 12, 64]);
+  %190 = transpose(%189, axes=[0, 2, 1, 3]);
+  %191 = broadcast_to(%190, shape=[16, 12, 512, 64]);
+  %192 = reshape(%187, newshape=[-1, 512, 512]);
+  %193 = reshape(%191, newshape=[-1, 512, 64]);
+  %194 = nn.batch_matmul(%192, %193);
+  %195 = reshape(%194, newshape=[16, 12, 512, 64]);
+  %196 = squeeze(%195, axis=[]);
+  %197 = transpose(%196, axes=[0, 2, 1, 3]);
+  %198 = reshape(%197, newshape=[16, 512, 768]);
+  %199 = reshape(%198, newshape=[-1, 768]);
+  %200 = transpose(%h.2.attn.c_proj.weight, axes=[1, 0]);
+  %201 = nn.dense(%199, %200, units=768);
+  %202 = add(%201, %h.2.attn.c_proj.bias);
+  %203 = reshape(%202, newshape=[16, 512, 768]);
+  %204 = nn.dropout(%203, rate=0.1f);
+  %205 = %204.0;
+  %206 = add(%156, %205);
+  %207 = nn.layer_norm(%206, %h.2.ln_1.weight, %h.2.ln_1.bias);
+  %208 = reshape(%207, newshape=[-1, 768]);
+  %209 = transpose(%h.2.mlp.c_fc.weight, axes=[1, 0]);
+  %210 = nn.dense(%208, %209, units=3072);
+  %211 = add(%210, %h.2.mlp.c_fc.bias);
+  %212 = reshape(%211, newshape=[16, 512, 3072]);
+  %213 = power(%212, 3f);
+  %214 = multiply(%213, 0.044715f);
+  %215 = add(%212, %214);
+  %216 = multiply(%215, 0.797885f);
+  %217 = tanh(%216);
+  %218 = multiply(%212, 0.5f);
+  %219 = add(%217, 1f);
+  %220 = multiply(%218, %219);
+  %221 = reshape(%220, newshape=[-1, 3072]);
+  %222 = transpose(%h.2.mlp.c_proj.weight, axes=[1, 0]);
+  %223 = nn.dense(%221, %222, units=768);
+  %224 = add(%223, %h.2.mlp.c_proj.bias);
+  %225 = reshape(%224, newshape=[16, 512, 768]);
+  %226 = nn.dropout(%225, rate=0.1f);
+  %227 = %226.0;
+  %228 = add(%207, %227);
+  %229 = nn.layer_norm(%228, %h.2.ln_2.weight, %h.2.ln_2.bias);
+  %230 = reshape(%229, newshape=[-1, 768]);
+  %231 = transpose(%h.3.attn.c_attn.weight, axes=[1, 0]);
+  %232 = nn.dense(%230, %231, units=2304);
+  %233 = add(%232, %h.3.attn.c_attn.bias);
+  %234 = reshape(%233, newshape=[16, 512, 2304]);
+  %235 = split(%234, indices_or_sections=[768, 1536], axis=2);
+  %236 = %235.0;
+  %237 = reshape(%236, newshape=[16, 512, 12, 64]);
+  %238 = transpose(%237, axes=[0, 2, 1, 3]);
+  %239 = broadcast_to(%238, shape=[16, 12, 512, 64]);
+  %240 = %235.1;
+  %241 = reshape(%240, newshape=[16, 512, 12, 64]);
+  %242 = transpose(%241, axes=[0, 2, 3, 1]);
+  %243 = broadcast_to(%242, shape=[16, 12, 64, 512]);
+  %244 = reshape(%239, newshape=[-1, 512, 64]);
+  %245 = reshape(%243, newshape=[-1, 64, 512]);
+  %246 = nn.batch_matmul(%244, %245);
+  %247 = reshape(%246, newshape=[16, 12, 512, 512]);
+  %248 = squeeze(%247, axis=[]);
+  %249 = strided_slice(%h.3.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %250 = divide(%248, 8f);
+  %251 = strided_slice(%249, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %252 = multiply(1f, %251);
+  %253 = subtract(1f, %252);
+  %254 = multiply(%250, %251);
+  %255 = multiply(%253, -10000f);
+  %256 = add(%254, %255);
+  %257 = nn.softmax(%256);
+  %258 = nn.dropout(%257, rate=0.1f);
+  %259 = %258.0;
+  %260 = broadcast_to(%259, shape=[16, 12, 512, 512]);
+  %261 = %235.2;
+  %262 = reshape(%261, newshape=[16, 512, 12, 64]);
+  %263 = transpose(%262, axes=[0, 2, 1, 3]);
+  %264 = broadcast_to(%263, shape=[16, 12, 512, 64]);
+  %265 = reshape(%260, newshape=[-1, 512, 512]);
+  %266 = reshape(%264, newshape=[-1, 512, 64]);
+  %267 = nn.batch_matmul(%265, %266);
+  %268 = reshape(%267, newshape=[16, 12, 512, 64]);
+  %269 = squeeze(%268, axis=[]);
+  %270 = transpose(%269, axes=[0, 2, 1, 3]);
+  %271 = reshape(%270, newshape=[16, 512, 768]);
+  %272 = reshape(%271, newshape=[-1, 768]);
+  %273 = transpose(%h.3.attn.c_proj.weight, axes=[1, 0]);
+  %274 = nn.dense(%272, %273, units=768);
+  %275 = add(%274, %h.3.attn.c_proj.bias);
+  %276 = reshape(%275, newshape=[16, 512, 768]);
+  %277 = nn.dropout(%276, rate=0.1f);
+  %278 = %277.0;
+  %279 = add(%229, %278);
+  %280 = nn.layer_norm(%279, %h.3.ln_1.weight, %h.3.ln_1.bias);
+  %281 = reshape(%280, newshape=[-1, 768]);
+  %282 = transpose(%h.3.mlp.c_fc.weight, axes=[1, 0]);
+  %283 = nn.dense(%281, %282, units=3072);
+  %284 = add(%283, %h.3.mlp.c_fc.bias);
+  %285 = reshape(%284, newshape=[16, 512, 3072]);
+  %286 = power(%285, 3f);
+  %287 = multiply(%286, 0.044715f);
+  %288 = add(%285, %287);
+  %289 = multiply(%288, 0.797885f);
+  %290 = tanh(%289);
+  %291 = multiply(%285, 0.5f);
+  %292 = add(%290, 1f);
+  %293 = multiply(%291, %292);
+  %294 = reshape(%293, newshape=[-1, 3072]);
+  %295 = transpose(%h.3.mlp.c_proj.weight, axes=[1, 0]);
+  %296 = nn.dense(%294, %295, units=768);
+  %297 = add(%296, %h.3.mlp.c_proj.bias);
+  %298 = reshape(%297, newshape=[16, 512, 768]);
+  %299 = nn.dropout(%298, rate=0.1f);
+  %300 = %299.0;
+  %301 = add(%280, %300);
+  %302 = nn.layer_norm(%301, %h.3.ln_2.weight, %h.3.ln_2.bias);
+  %303 = reshape(%302, newshape=[-1, 768]);
+  %304 = transpose(%h.4.attn.c_attn.weight, axes=[1, 0]);
+  %305 = nn.dense(%303, %304, units=2304);
+  %306 = add(%305, %h.4.attn.c_attn.bias);
+  %307 = reshape(%306, newshape=[16, 512, 2304]);
+  %308 = split(%307, indices_or_sections=[768, 1536], axis=2);
+  %309 = %308.0;
+  %310 = reshape(%309, newshape=[16, 512, 12, 64]);
+  %311 = transpose(%310, axes=[0, 2, 1, 3]);
+  %312 = broadcast_to(%311, shape=[16, 12, 512, 64]);
+  %313 = %308.1;
+  %314 = reshape(%313, newshape=[16, 512, 12, 64]);
+  %315 = transpose(%314, axes=[0, 2, 3, 1]);
+  %316 = broadcast_to(%315, shape=[16, 12, 64, 512]);
+  %317 = reshape(%312, newshape=[-1, 512, 64]);
+  %318 = reshape(%316, newshape=[-1, 64, 512]);
+  %319 = nn.batch_matmul(%317, %318);
+  %320 = reshape(%319, newshape=[16, 12, 512, 512]);
+  %321 = squeeze(%320, axis=[]);
+  %322 = strided_slice(%h.4.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %323 = divide(%321, 8f);
+  %324 = strided_slice(%322, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %325 = multiply(1f, %324);
+  %326 = subtract(1f, %325);
+  %327 = multiply(%323, %324);
+  %328 = multiply(%326, -10000f);
+  %329 = add(%327, %328);
+  %330 = nn.softmax(%329);
+  %331 = nn.dropout(%330, rate=0.1f);
+  %332 = %331.0;
+  %333 = broadcast_to(%332, shape=[16, 12, 512, 512]);
+  %334 = %308.2;
+  %335 = reshape(%334, newshape=[16, 512, 12, 64]);
+  %336 = transpose(%335, axes=[0, 2, 1, 3]);
+  %337 = broadcast_to(%336, shape=[16, 12, 512, 64]);
+  %338 = reshape(%333, newshape=[-1, 512, 512]);
+  %339 = reshape(%337, newshape=[-1, 512, 64]);
+  %340 = nn.batch_matmul(%338, %339);
+  %341 = reshape(%340, newshape=[16, 12, 512, 64]);
+  %342 = squeeze(%341, axis=[]);
+  %343 = transpose(%342, axes=[0, 2, 1, 3]);
+  %344 = reshape(%343, newshape=[16, 512, 768]);
+  %345 = reshape(%344, newshape=[-1, 768]);
+  %346 = transpose(%h.4.attn.c_proj.weight, axes=[1, 0]);
+  %347 = nn.dense(%345, %346, units=768);
+  %348 = add(%347, %h.4.attn.c_proj.bias);
+  %349 = reshape(%348, newshape=[16, 512, 768]);
+  %350 = nn.dropout(%349, rate=0.1f);
+  %351 = %350.0;
+  %352 = add(%302, %351);
+  %353 = nn.layer_norm(%352, %h.4.ln_1.weight, %h.4.ln_1.bias);
+  %354 = reshape(%353, newshape=[-1, 768]);
+  %355 = transpose(%h.4.mlp.c_fc.weight, axes=[1, 0]);
+  %356 = nn.dense(%354, %355, units=3072);
+  %357 = add(%356, %h.4.mlp.c_fc.bias);
+  %358 = reshape(%357, newshape=[16, 512, 3072]);
+  %359 = power(%358, 3f);
+  %360 = multiply(%359, 0.044715f);
+  %361 = add(%358, %360);
+  %362 = multiply(%361, 0.797885f);
+  %363 = tanh(%362);
+  %364 = multiply(%358, 0.5f);
+  %365 = add(%363, 1f);
+  %366 = multiply(%364, %365);
+  %367 = reshape(%366, newshape=[-1, 3072]);
+  %368 = transpose(%h.4.mlp.c_proj.weight, axes=[1, 0]);
+  %369 = nn.dense(%367, %368, units=768);
+  %370 = add(%369, %h.4.mlp.c_proj.bias);
+  %371 = reshape(%370, newshape=[16, 512, 768]);
+  %372 = nn.dropout(%371, rate=0.1f);
+  %373 = %372.0;
+  %374 = add(%353, %373);
+  %375 = nn.layer_norm(%374, %h.4.ln_2.weight, %h.4.ln_2.bias);
+  %376 = reshape(%375, newshape=[-1, 768]);
+  %377 = transpose(%h.5.attn.c_attn.weight, axes=[1, 0]);
+  %378 = nn.dense(%376, %377, units=2304);
+  %379 = add(%378, %h.5.attn.c_attn.bias);
+  %380 = reshape(%379, newshape=[16, 512, 2304]);
+  %381 = split(%380, indices_or_sections=[768, 1536], axis=2);
+  %382 = %381.0;
+  %383 = reshape(%382, newshape=[16, 512, 12, 64]);
+  %384 = transpose(%383, axes=[0, 2, 1, 3]);
+  %385 = broadcast_to(%384, shape=[16, 12, 512, 64]);
+  %386 = %381.1;
+  %387 = reshape(%386, newshape=[16, 512, 12, 64]);
+  %388 = transpose(%387, axes=[0, 2, 3, 1]);
+  %389 = broadcast_to(%388, shape=[16, 12, 64, 512]);
+  %390 = reshape(%385, newshape=[-1, 512, 64]);
+  %391 = reshape(%389, newshape=[-1, 64, 512]);
+  %392 = nn.batch_matmul(%390, %391);
+  %393 = reshape(%392, newshape=[16, 12, 512, 512]);
+  %394 = squeeze(%393, axis=[]);
+  %395 = strided_slice(%h.5.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %396 = divide(%394, 8f);
+  %397 = strided_slice(%395, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %398 = multiply(1f, %397);
+  %399 = subtract(1f, %398);
+  %400 = multiply(%396, %397);
+  %401 = multiply(%399, -10000f);
+  %402 = add(%400, %401);
+  %403 = nn.softmax(%402);
+  %404 = nn.dropout(%403, rate=0.1f);
+  %405 = %404.0;
+  %406 = broadcast_to(%405, shape=[16, 12, 512, 512]);
+  %407 = %381.2;
+  %408 = reshape(%407, newshape=[16, 512, 12, 64]);
+  %409 = transpose(%408, axes=[0, 2, 1, 3]);
+  %410 = broadcast_to(%409, shape=[16, 12, 512, 64]);
+  %411 = reshape(%406, newshape=[-1, 512, 512]);
+  %412 = reshape(%410, newshape=[-1, 512, 64]);
+  %413 = nn.batch_matmul(%411, %412);
+  %414 = reshape(%413, newshape=[16, 12, 512, 64]);
+  %415 = squeeze(%414, axis=[]);
+  %416 = transpose(%415, axes=[0, 2, 1, 3]);
+  %417 = reshape(%416, newshape=[16, 512, 768]);
+  %418 = reshape(%417, newshape=[-1, 768]);
+  %419 = transpose(%h.5.attn.c_proj.weight, axes=[1, 0]);
+  %420 = nn.dense(%418, %419, units=768);
+  %421 = add(%420, %h.5.attn.c_proj.bias);
+  %422 = reshape(%421, newshape=[16, 512, 768]);
+  %423 = nn.dropout(%422, rate=0.1f);
+  %424 = %423.0;
+  %425 = add(%375, %424);
+  %426 = nn.layer_norm(%425, %h.5.ln_1.weight, %h.5.ln_1.bias);
+  %427 = reshape(%426, newshape=[-1, 768]);
+  %428 = transpose(%h.5.mlp.c_fc.weight, axes=[1, 0]);
+  %429 = nn.dense(%427, %428, units=3072);
+  %430 = add(%429, %h.5.mlp.c_fc.bias);
+  %431 = reshape(%430, newshape=[16, 512, 3072]);
+  %432 = power(%431, 3f);
+  %433 = multiply(%432, 0.044715f);
+  %434 = add(%431, %433);
+  %435 = multiply(%434, 0.797885f);
+  %436 = tanh(%435);
+  %437 = multiply(%431, 0.5f);
+  %438 = add(%436, 1f);
+  %439 = multiply(%437, %438);
+  %440 = reshape(%439, newshape=[-1, 3072]);
+  %441 = transpose(%h.5.mlp.c_proj.weight, axes=[1, 0]);
+  %442 = nn.dense(%440, %441, units=768);
+  %443 = add(%442, %h.5.mlp.c_proj.bias);
+  %444 = reshape(%443, newshape=[16, 512, 768]);
+  %445 = nn.dropout(%444, rate=0.1f);
+  %446 = %445.0;
+  %447 = add(%426, %446);
+  %448 = nn.layer_norm(%447, %h.5.ln_2.weight, %h.5.ln_2.bias);
+  %449 = reshape(%448, newshape=[-1, 768]);
+  %450 = transpose(%h.6.attn.c_attn.weight, axes=[1, 0]);
+  %451 = nn.dense(%449, %450, units=2304);
+  %452 = add(%451, %h.6.attn.c_attn.bias);
+  %453 = reshape(%452, newshape=[16, 512, 2304]);
+  %454 = split(%453, indices_or_sections=[768, 1536], axis=2);
+  %455 = %454.0;
+  %456 = reshape(%455, newshape=[16, 512, 12, 64]);
+  %457 = transpose(%456, axes=[0, 2, 1, 3]);
+  %458 = broadcast_to(%457, shape=[16, 12, 512, 64]);
+  %459 = %454.1;
+  %460 = reshape(%459, newshape=[16, 512, 12, 64]);
+  %461 = transpose(%460, axes=[0, 2, 3, 1]);
+  %462 = broadcast_to(%461, shape=[16, 12, 64, 512]);
+  %463 = reshape(%458, newshape=[-1, 512, 64]);
+  %464 = reshape(%462, newshape=[-1, 64, 512]);
+  %465 = nn.batch_matmul(%463, %464);
+  %466 = reshape(%465, newshape=[16, 12, 512, 512]);
+  %467 = squeeze(%466, axis=[]);
+  %468 = strided_slice(%h.6.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %469 = divide(%467, 8f);
+  %470 = strided_slice(%468, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %471 = multiply(1f, %470);
+  %472 = subtract(1f, %471);
+  %473 = multiply(%469, %470);
+  %474 = multiply(%472, -10000f);
+  %475 = add(%473, %474);
+  %476 = nn.softmax(%475);
+  %477 = nn.dropout(%476, rate=0.1f);
+  %478 = %477.0;
+  %479 = broadcast_to(%478, shape=[16, 12, 512, 512]);
+  %480 = %454.2;
+  %481 = reshape(%480, newshape=[16, 512, 12, 64]);
+  %482 = transpose(%481, axes=[0, 2, 1, 3]);
+  %483 = broadcast_to(%482, shape=[16, 12, 512, 64]);
+  %484 = reshape(%479, newshape=[-1, 512, 512]);
+  %485 = reshape(%483, newshape=[-1, 512, 64]);
+  %486 = nn.batch_matmul(%484, %485);
+  %487 = reshape(%486, newshape=[16, 12, 512, 64]);
+  %488 = squeeze(%487, axis=[]);
+  %489 = transpose(%488, axes=[0, 2, 1, 3]);
+  %490 = reshape(%489, newshape=[16, 512, 768]);
+  %491 = reshape(%490, newshape=[-1, 768]);
+  %492 = transpose(%h.6.attn.c_proj.weight, axes=[1, 0]);
+  %493 = nn.dense(%491, %492, units=768);
+  %494 = add(%493, %h.6.attn.c_proj.bias);
+  %495 = reshape(%494, newshape=[16, 512, 768]);
+  %496 = nn.dropout(%495, rate=0.1f);
+  %497 = %496.0;
+  %498 = add(%448, %497);
+  %499 = nn.layer_norm(%498, %h.6.ln_1.weight, %h.6.ln_1.bias);
+  %500 = reshape(%499, newshape=[-1, 768]);
+  %501 = transpose(%h.6.mlp.c_fc.weight, axes=[1, 0]);
+  %502 = nn.dense(%500, %501, units=3072);
+  %503 = add(%502, %h.6.mlp.c_fc.bias);
+  %504 = reshape(%503, newshape=[16, 512, 3072]);
+  %505 = power(%504, 3f);
+  %506 = multiply(%505, 0.044715f);
+  %507 = add(%504, %506);
+  %508 = multiply(%507, 0.797885f);
+  %509 = tanh(%508);
+  %510 = multiply(%504, 0.5f);
+  %511 = add(%509, 1f);
+  %512 = multiply(%510, %511);
+  %513 = reshape(%512, newshape=[-1, 3072]);
+  %514 = transpose(%h.6.mlp.c_proj.weight, axes=[1, 0]);
+  %515 = nn.dense(%513, %514, units=768);
+  %516 = add(%515, %h.6.mlp.c_proj.bias);
+  %517 = reshape(%516, newshape=[16, 512, 768]);
+  %518 = nn.dropout(%517, rate=0.1f);
+  %519 = %518.0;
+  %520 = add(%499, %519);
+  %521 = nn.layer_norm(%520, %h.6.ln_2.weight, %h.6.ln_2.bias);
+  %522 = reshape(%521, newshape=[-1, 768]);
+  %523 = transpose(%h.7.attn.c_attn.weight, axes=[1, 0]);
+  %524 = nn.dense(%522, %523, units=2304);
+  %525 = add(%524, %h.7.attn.c_attn.bias);
+  %526 = reshape(%525, newshape=[16, 512, 2304]);
+  %527 = split(%526, indices_or_sections=[768, 1536], axis=2);
+  %528 = %527.0;
+  %529 = reshape(%528, newshape=[16, 512, 12, 64]);
+  %530 = transpose(%529, axes=[0, 2, 1, 3]);
+  %531 = broadcast_to(%530, shape=[16, 12, 512, 64]);
+  %532 = %527.1;
+  %533 = reshape(%532, newshape=[16, 512, 12, 64]);
+  %534 = transpose(%533, axes=[0, 2, 3, 1]);
+  %535 = broadcast_to(%534, shape=[16, 12, 64, 512]);
+  %536 = reshape(%531, newshape=[-1, 512, 64]);
+  %537 = reshape(%535, newshape=[-1, 64, 512]);
+  %538 = nn.batch_matmul(%536, %537);
+  %539 = reshape(%538, newshape=[16, 12, 512, 512]);
+  %540 = squeeze(%539, axis=[]);
+  %541 = strided_slice(%h.7.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %542 = divide(%540, 8f);
+  %543 = strided_slice(%541, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %544 = multiply(1f, %543);
+  %545 = subtract(1f, %544);
+  %546 = multiply(%542, %543);
+  %547 = multiply(%545, -10000f);
+  %548 = add(%546, %547);
+  %549 = nn.softmax(%548);
+  %550 = nn.dropout(%549, rate=0.1f);
+  %551 = %550.0;
+  %552 = broadcast_to(%551, shape=[16, 12, 512, 512]);
+  %553 = %527.2;
+  %554 = reshape(%553, newshape=[16, 512, 12, 64]);
+  %555 = transpose(%554, axes=[0, 2, 1, 3]);
+  %556 = broadcast_to(%555, shape=[16, 12, 512, 64]);
+  %557 = reshape(%552, newshape=[-1, 512, 512]);
+  %558 = reshape(%556, newshape=[-1, 512, 64]);
+  %559 = nn.batch_matmul(%557, %558);
+  %560 = reshape(%559, newshape=[16, 12, 512, 64]);
+  %561 = squeeze(%560, axis=[]);
+  %562 = transpose(%561, axes=[0, 2, 1, 3]);
+  %563 = reshape(%562, newshape=[16, 512, 768]);
+  %564 = reshape(%563, newshape=[-1, 768]);
+  %565 = transpose(%h.7.attn.c_proj.weight, axes=[1, 0]);
+  %566 = nn.dense(%564, %565, units=768);
+  %567 = add(%566, %h.7.attn.c_proj.bias);
+  %568 = reshape(%567, newshape=[16, 512, 768]);
+  %569 = nn.dropout(%568, rate=0.1f);
+  %570 = %569.0;
+  %571 = add(%521, %570);
+  %572 = nn.layer_norm(%571, %h.7.ln_1.weight, %h.7.ln_1.bias);
+  %573 = reshape(%572, newshape=[-1, 768]);
+  %574 = transpose(%h.7.mlp.c_fc.weight, axes=[1, 0]);
+  %575 = nn.dense(%573, %574, units=3072);
+  %576 = add(%575, %h.7.mlp.c_fc.bias);
+  %577 = reshape(%576, newshape=[16, 512, 3072]);
+  %578 = power(%577, 3f);
+  %579 = multiply(%578, 0.044715f);
+  %580 = add(%577, %579);
+  %581 = multiply(%580, 0.797885f);
+  %582 = tanh(%581);
+  %583 = multiply(%577, 0.5f);
+  %584 = add(%582, 1f);
+  %585 = multiply(%583, %584);
+  %586 = reshape(%585, newshape=[-1, 3072]);
+  %587 = transpose(%h.7.mlp.c_proj.weight, axes=[1, 0]);
+  %588 = nn.dense(%586, %587, units=768);
+  %589 = add(%588, %h.7.mlp.c_proj.bias);
+  %590 = reshape(%589, newshape=[16, 512, 768]);
+  %591 = nn.dropout(%590, rate=0.1f);
+  %592 = %591.0;
+  %593 = add(%572, %592);
+  %594 = nn.layer_norm(%593, %h.7.ln_2.weight, %h.7.ln_2.bias);
+  %595 = reshape(%594, newshape=[-1, 768]);
+  %596 = transpose(%h.8.attn.c_attn.weight, axes=[1, 0]);
+  %597 = nn.dense(%595, %596, units=2304);
+  %598 = add(%597, %h.8.attn.c_attn.bias);
+  %599 = reshape(%598, newshape=[16, 512, 2304]);
+  %600 = split(%599, indices_or_sections=[768, 1536], axis=2);
+  %601 = %600.0;
+  %602 = reshape(%601, newshape=[16, 512, 12, 64]);
+  %603 = transpose(%602, axes=[0, 2, 1, 3]);
+  %604 = broadcast_to(%603, shape=[16, 12, 512, 64]);
+  %605 = %600.1;
+  %606 = reshape(%605, newshape=[16, 512, 12, 64]);
+  %607 = transpose(%606, axes=[0, 2, 3, 1]);
+  %608 = broadcast_to(%607, shape=[16, 12, 64, 512]);
+  %609 = reshape(%604, newshape=[-1, 512, 64]);
+  %610 = reshape(%608, newshape=[-1, 64, 512]);
+  %611 = nn.batch_matmul(%609, %610);
+  %612 = reshape(%611, newshape=[16, 12, 512, 512]);
+  %613 = squeeze(%612, axis=[]);
+  %614 = strided_slice(%h.8.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %615 = divide(%613, 8f);
+  %616 = strided_slice(%614, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %617 = multiply(1f, %616);
+  %618 = subtract(1f, %617);
+  %619 = multiply(%615, %616);
+  %620 = multiply(%618, -10000f);
+  %621 = add(%619, %620);
+  %622 = nn.softmax(%621);
+  %623 = nn.dropout(%622, rate=0.1f);
+  %624 = %623.0;
+  %625 = broadcast_to(%624, shape=[16, 12, 512, 512]);
+  %626 = %600.2;
+  %627 = reshape(%626, newshape=[16, 512, 12, 64]);
+  %628 = transpose(%627, axes=[0, 2, 1, 3]);
+  %629 = broadcast_to(%628, shape=[16, 12, 512, 64]);
+  %630 = reshape(%625, newshape=[-1, 512, 512]);
+  %631 = reshape(%629, newshape=[-1, 512, 64]);
+  %632 = nn.batch_matmul(%630, %631);
+  %633 = reshape(%632, newshape=[16, 12, 512, 64]);
+  %634 = squeeze(%633, axis=[]);
+  %635 = transpose(%634, axes=[0, 2, 1, 3]);
+  %636 = reshape(%635, newshape=[16, 512, 768]);
+  %637 = reshape(%636, newshape=[-1, 768]);
+  %638 = transpose(%h.8.attn.c_proj.weight, axes=[1, 0]);
+  %639 = nn.dense(%637, %638, units=768);
+  %640 = add(%639, %h.8.attn.c_proj.bias);
+  %641 = reshape(%640, newshape=[16, 512, 768]);
+  %642 = nn.dropout(%641, rate=0.1f);
+  %643 = %642.0;
+  %644 = add(%594, %643);
+  %645 = nn.layer_norm(%644, %h.8.ln_1.weight, %h.8.ln_1.bias);
+  %646 = reshape(%645, newshape=[-1, 768]);
+  %647 = transpose(%h.8.mlp.c_fc.weight, axes=[1, 0]);
+  %648 = nn.dense(%646, %647, units=3072);
+  %649 = add(%648, %h.8.mlp.c_fc.bias);
+  %650 = reshape(%649, newshape=[16, 512, 3072]);
+  %651 = power(%650, 3f);
+  %652 = multiply(%651, 0.044715f);
+  %653 = add(%650, %652);
+  %654 = multiply(%653, 0.797885f);
+  %655 = tanh(%654);
+  %656 = multiply(%650, 0.5f);
+  %657 = add(%655, 1f);
+  %658 = multiply(%656, %657);
+  %659 = reshape(%658, newshape=[-1, 3072]);
+  %660 = transpose(%h.8.mlp.c_proj.weight, axes=[1, 0]);
+  %661 = nn.dense(%659, %660, units=768);
+  %662 = add(%661, %h.8.mlp.c_proj.bias);
+  %663 = reshape(%662, newshape=[16, 512, 768]);
+  %664 = nn.dropout(%663, rate=0.1f);
+  %665 = %664.0;
+  %666 = add(%645, %665);
+  %667 = nn.layer_norm(%666, %h.8.ln_2.weight, %h.8.ln_2.bias);
+  %668 = reshape(%667, newshape=[-1, 768]);
+  %669 = transpose(%h.9.attn.c_attn.weight, axes=[1, 0]);
+  %670 = nn.dense(%668, %669, units=2304);
+  %671 = add(%670, %h.9.attn.c_attn.bias);
+  %672 = reshape(%671, newshape=[16, 512, 2304]);
+  %673 = split(%672, indices_or_sections=[768, 1536], axis=2);
+  %674 = %673.0;
+  %675 = reshape(%674, newshape=[16, 512, 12, 64]);
+  %676 = transpose(%675, axes=[0, 2, 1, 3]);
+  %677 = broadcast_to(%676, shape=[16, 12, 512, 64]);
+  %678 = %673.1;
+  %679 = reshape(%678, newshape=[16, 512, 12, 64]);
+  %680 = transpose(%679, axes=[0, 2, 3, 1]);
+  %681 = broadcast_to(%680, shape=[16, 12, 64, 512]);
+  %682 = reshape(%677, newshape=[-1, 512, 64]);
+  %683 = reshape(%681, newshape=[-1, 64, 512]);
+  %684 = nn.batch_matmul(%682, %683);
+  %685 = reshape(%684, newshape=[16, 12, 512, 512]);
+  %686 = squeeze(%685, axis=[]);
+  %687 = strided_slice(%h.9.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %688 = divide(%686, 8f);
+  %689 = strided_slice(%687, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %690 = multiply(1f, %689);
+  %691 = subtract(1f, %690);
+  %692 = multiply(%688, %689);
+  %693 = multiply(%691, -10000f);
+  %694 = add(%692, %693);
+  %695 = nn.softmax(%694);
+  %696 = nn.dropout(%695, rate=0.1f);
+  %697 = %696.0;
+  %698 = broadcast_to(%697, shape=[16, 12, 512, 512]);
+  %699 = %673.2;
+  %700 = reshape(%699, newshape=[16, 512, 12, 64]);
+  %701 = transpose(%700, axes=[0, 2, 1, 3]);
+  %702 = broadcast_to(%701, shape=[16, 12, 512, 64]);
+  %703 = reshape(%698, newshape=[-1, 512, 512]);
+  %704 = reshape(%702, newshape=[-1, 512, 64]);
+  %705 = nn.batch_matmul(%703, %704);
+  %706 = reshape(%705, newshape=[16, 12, 512, 64]);
+  %707 = squeeze(%706, axis=[]);
+  %708 = transpose(%707, axes=[0, 2, 1, 3]);
+  %709 = reshape(%708, newshape=[16, 512, 768]);
+  %710 = reshape(%709, newshape=[-1, 768]);
+  %711 = transpose(%h.9.attn.c_proj.weight, axes=[1, 0]);
+  %712 = nn.dense(%710, %711, units=768);
+  %713 = add(%712, %h.9.attn.c_proj.bias);
+  %714 = reshape(%713, newshape=[16, 512, 768]);
+  %715 = nn.dropout(%714, rate=0.1f);
+  %716 = %715.0;
+  %717 = add(%667, %716);
+  %718 = nn.layer_norm(%717, %h.9.ln_1.weight, %h.9.ln_1.bias);
+  %719 = reshape(%718, newshape=[-1, 768]);
+  %720 = transpose(%h.9.mlp.c_fc.weight, axes=[1, 0]);
+  %721 = nn.dense(%719, %720, units=3072);
+  %722 = add(%721, %h.9.mlp.c_fc.bias);
+  %723 = reshape(%722, newshape=[16, 512, 3072]);
+  %724 = power(%723, 3f);
+  %725 = multiply(%724, 0.044715f);
+  %726 = add(%723, %725);
+  %727 = multiply(%726, 0.797885f);
+  %728 = tanh(%727);
+  %729 = multiply(%723, 0.5f);
+  %730 = add(%728, 1f);
+  %731 = multiply(%729, %730);
+  %732 = reshape(%731, newshape=[-1, 3072]);
+  %733 = transpose(%h.9.mlp.c_proj.weight, axes=[1, 0]);
+  %734 = nn.dense(%732, %733, units=768);
+  %735 = add(%734, %h.9.mlp.c_proj.bias);
+  %736 = reshape(%735, newshape=[16, 512, 768]);
+  %737 = nn.dropout(%736, rate=0.1f);
+  %738 = %737.0;
+  %739 = add(%718, %738);
+  %740 = nn.layer_norm(%739, %h.9.ln_2.weight, %h.9.ln_2.bias);
+  %741 = reshape(%740, newshape=[-1, 768]);
+  %742 = transpose(%h.10.attn.c_attn.weight, axes=[1, 0]);
+  %743 = nn.dense(%741, %742, units=2304);
+  %744 = add(%743, %h.10.attn.c_attn.bias);
+  %745 = reshape(%744, newshape=[16, 512, 2304]);
+  %746 = split(%745, indices_or_sections=[768, 1536], axis=2);
+  %747 = %746.0;
+  %748 = reshape(%747, newshape=[16, 512, 12, 64]);
+  %749 = transpose(%748, axes=[0, 2, 1, 3]);
+  %750 = broadcast_to(%749, shape=[16, 12, 512, 64]);
+  %751 = %746.1;
+  %752 = reshape(%751, newshape=[16, 512, 12, 64]);
+  %753 = transpose(%752, axes=[0, 2, 3, 1]);
+  %754 = broadcast_to(%753, shape=[16, 12, 64, 512]);
+  %755 = reshape(%750, newshape=[-1, 512, 64]);
+  %756 = reshape(%754, newshape=[-1, 64, 512]);
+  %757 = nn.batch_matmul(%755, %756);
+  %758 = reshape(%757, newshape=[16, 12, 512, 512]);
+  %759 = squeeze(%758, axis=[]);
+  %760 = strided_slice(%h.10.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %761 = divide(%759, 8f);
+  %762 = strided_slice(%760, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %763 = multiply(1f, %762);
+  %764 = subtract(1f, %763);
+  %765 = multiply(%761, %762);
+  %766 = multiply(%764, -10000f);
+  %767 = add(%765, %766);
+  %768 = nn.softmax(%767);
+  %769 = nn.dropout(%768, rate=0.1f);
+  %770 = %769.0;
+  %771 = broadcast_to(%770, shape=[16, 12, 512, 512]);
+  %772 = %746.2;
+  %773 = reshape(%772, newshape=[16, 512, 12, 64]);
+  %774 = transpose(%773, axes=[0, 2, 1, 3]);
+  %775 = broadcast_to(%774, shape=[16, 12, 512, 64]);
+  %776 = reshape(%771, newshape=[-1, 512, 512]);
+  %777 = reshape(%775, newshape=[-1, 512, 64]);
+  %778 = nn.batch_matmul(%776, %777);
+  %779 = reshape(%778, newshape=[16, 12, 512, 64]);
+  %780 = squeeze(%779, axis=[]);
+  %781 = transpose(%780, axes=[0, 2, 1, 3]);
+  %782 = reshape(%781, newshape=[16, 512, 768]);
+  %783 = reshape(%782, newshape=[-1, 768]);
+  %784 = transpose(%h.10.attn.c_proj.weight, axes=[1, 0]);
+  %785 = nn.dense(%783, %784, units=768);
+  %786 = add(%785, %h.10.attn.c_proj.bias);
+  %787 = reshape(%786, newshape=[16, 512, 768]);
+  %788 = nn.dropout(%787, rate=0.1f);
+  %789 = %788.0;
+  %790 = add(%740, %789);
+  %791 = nn.layer_norm(%790, %h.10.ln_1.weight, %h.10.ln_1.bias);
+  %792 = reshape(%791, newshape=[-1, 768]);
+  %793 = transpose(%h.10.mlp.c_fc.weight, axes=[1, 0]);
+  %794 = nn.dense(%792, %793, units=3072);
+  %795 = add(%794, %h.10.mlp.c_fc.bias);
+  %796 = reshape(%795, newshape=[16, 512, 3072]);
+  %797 = power(%796, 3f);
+  %798 = multiply(%797, 0.044715f);
+  %799 = add(%796, %798);
+  %800 = multiply(%799, 0.797885f);
+  %801 = tanh(%800);
+  %802 = multiply(%796, 0.5f);
+  %803 = add(%801, 1f);
+  %804 = multiply(%802, %803);
+  %805 = reshape(%804, newshape=[-1, 3072]);
+  %806 = transpose(%h.10.mlp.c_proj.weight, axes=[1, 0]);
+  %807 = nn.dense(%805, %806, units=768);
+  %808 = add(%807, %h.10.mlp.c_proj.bias);
+  %809 = reshape(%808, newshape=[16, 512, 768]);
+  %810 = nn.dropout(%809, rate=0.1f);
+  %811 = %810.0;
+  %812 = add(%791, %811);
+  %813 = nn.layer_norm(%812, %h.10.ln_2.weight, %h.10.ln_2.bias);
+  %814 = reshape(%813, newshape=[-1, 768]);
+  %815 = transpose(%h.11.attn.c_attn.weight, axes=[1, 0]);
+  %816 = nn.dense(%814, %815, units=2304);
+  %817 = add(%816, %h.11.attn.c_attn.bias);
+  %818 = reshape(%817, newshape=[16, 512, 2304]);
+  %819 = split(%818, indices_or_sections=[768, 1536], axis=2);
+  %820 = %819.0;
+  %821 = reshape(%820, newshape=[16, 512, 12, 64]);
+  %822 = transpose(%821, axes=[0, 2, 1, 3]);
+  %823 = broadcast_to(%822, shape=[16, 12, 512, 64]);
+  %824 = %819.1;
+  %825 = reshape(%824, newshape=[16, 512, 12, 64]);
+  %826 = transpose(%825, axes=[0, 2, 3, 1]);
+  %827 = broadcast_to(%826, shape=[16, 12, 64, 512]);
+  %828 = reshape(%823, newshape=[-1, 512, 64]);
+  %829 = reshape(%827, newshape=[-1, 64, 512]);
+  %830 = nn.batch_matmul(%828, %829);
+  %831 = reshape(%830, newshape=[16, 12, 512, 512]);
+  %832 = squeeze(%831, axis=[]);
+  %833 = strided_slice(%h.11.attn.bias, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %834 = divide(%832, 8f);
+  %835 = strided_slice(%833, begin=[0, 0, 0, 0], end=[1, 1, 512, 512], strides=[1, 1, 1, 1], axes=None);
+  %836 = multiply(1f, %835);
+  %837 = subtract(1f, %836);
+  %838 = multiply(%834, %835);
+  %839 = multiply(%837, -10000f);
+  %840 = add(%838, %839);
+  %841 = nn.softmax(%840);
+  %842 = nn.dropout(%841, rate=0.1f);
+  %843 = %842.0;
+  %844 = broadcast_to(%843, shape=[16, 12, 512, 512]);
+  %845 = %819.2;
+  %846 = reshape(%845, newshape=[16, 512, 12, 64]);
+  %847 = transpose(%846, axes=[0, 2, 1, 3]);
+  %848 = broadcast_to(%847, shape=[16, 12, 512, 64]);
+  %849 = reshape(%844, newshape=[-1, 512, 512]);
+  %850 = reshape(%848, newshape=[-1, 512, 64]);
+  %851 = nn.batch_matmul(%849, %850);
+  %852 = reshape(%851, newshape=[16, 12, 512, 64]);
+  %853 = squeeze(%852, axis=[]);
+  %854 = transpose(%853, axes=[0, 2, 1, 3]);
+  %855 = reshape(%854, newshape=[16, 512, 768]);
+  %856 = reshape(%855, newshape=[-1, 768]);
+  %857 = transpose(%h.11.attn.c_proj.weight, axes=[1, 0]);
+  %858 = nn.dense(%856, %857, units=768);
+  %859 = add(%858, %h.11.attn.c_proj.bias);
+  %860 = reshape(%859, newshape=[16, 512, 768]);
+  %861 = nn.dropout(%860, rate=0.1f);
+  %862 = %861.0;
+  %863 = add(%813, %862);
+  %864 = nn.layer_norm(%863, %h.11.ln_1.weight, %h.11.ln_1.bias);
+  %865 = reshape(%864, newshape=[-1, 768]);
+  %866 = transpose(%h.11.mlp.c_fc.weight, axes=[1, 0]);
+  %867 = nn.dense(%865, %866, units=3072);
+  %868 = add(%867, %h.11.mlp.c_fc.bias);
+  %869 = reshape(%868, newshape=[16, 512, 3072]);
+  %870 = power(%869, 3f);
+  %871 = multiply(%870, 0.044715f);
+  %872 = add(%869, %871);
+  %873 = multiply(%872, 0.797885f);
+  %874 = tanh(%873);
+  %875 = multiply(%869, 0.5f);
+  %876 = add(%874, 1f);
+  %877 = multiply(%875, %876);
+  %878 = reshape(%877, newshape=[-1, 3072]);
+  %879 = transpose(%h.11.mlp.c_proj.weight, axes=[1, 0]);
+  %880 = nn.dense(%878, %879, units=768);
+  %881 = add(%880, %h.11.mlp.c_proj.bias);
+  %882 = reshape(%881, newshape=[16, 512, 768]);
+  %883 = nn.dropout(%882, rate=0.1f);
+  %884 = %883.0;
+  %885 = add(%864, %884);
+  %886 = nn.layer_norm(%885, %h.11.ln_2.weight, %h.11.ln_2.bias);
+  reshape(%886, newshape=[16, 512, 768])
+}
