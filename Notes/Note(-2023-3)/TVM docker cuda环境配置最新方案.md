@@ -1,3 +1,5 @@
+[TOC]
+
 # TVM docker cuda环境配置最新方案
 
 2023-3-22
@@ -39,8 +41,54 @@ docker内的python环境采用venv中的apache-tvm-py3.7虚拟环境，激活后
 最后需要手动安装的有
 
 ```
-sudo apt-get install transformers
+sudo pip install transformers
+sudo pip install datasets
 sudo apt-get install ssh
 ```
 
 等其他需要安装的包。
+
+#### github备份
+
+先在环境内生成并保存SSH key
+
+```
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub
+```
+
+复制内容，到github主页设置里新建新的SSH key，生成后在本地进行ssh测试
+
+```
+ssh -T git@github.com
+```
+
+能通说明key有效；
+
+输入自己的github账户信息
+
+```
+sudo git config --global user.name "yourname"
+sudo git config --global user.email "youremail"
+```
+
+在github主页新建repo，按照repo上的command line走：
+
+![git](pics/docker_cuda/git.png)
+
+注意在tvm docker环境内，除了最后一句`git push -u origin main`不需要加`sudo`其他command均需要加`sudo`;
+
+#### tvm去除submodule
+
+删去tvm里面git的所有配置文件，重新`git init`即可。
+
+#### .gitignore
+
+build tvm后生成的build文件夹是没有办法上传github的，此时需要在工作目录下新建.gitignore文件，添加
+
+```
+# 忽略build文件夹
+/tvm/build
+```
+
+即可不上传build文件夹。
