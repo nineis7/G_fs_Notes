@@ -28,7 +28,7 @@
 ./docker/bash.sh tvm.ci_gpu --mount "($pwd)"
 ```
 
-进入docker环境且挂载到本地目录下，进入vscode远程管理器，选择tvm.ci_gpu容器，点击attach new window：
+进入docker环境且挂载到本地目录下，进入vscode远程管理器，选择tvm.ci_gpu容器，点击Attach in New Window：
 
 ![container](pics/docker_cuda/container.png)
 
