@@ -26,6 +26,7 @@
 
 ```
 ./docker/bash.sh tvm.ci_gpu --mount "($pwd)"
+or ./docker/bash.sh tvm.ci_gpu --mount="/home/nineis/ws/gpt-frontend"
 ```
 
 进入docker环境且挂载到本地目录下，进入vscode远程管理器，选择tvm.ci_gpu容器，点击Attach in New Window：
@@ -92,3 +93,7 @@ build tvm后生成的build文件夹是没有办法上传github的，此时需要
 ```
 
 即可不上传build文件夹。
+
+#### build with PAPI 
+
+见PAPI.md
