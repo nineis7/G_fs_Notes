@@ -46,7 +46,7 @@ make && make install
 
 在[tvm官方文档](https://tvm.apache.org/docs/how_to/profile/papi.html)中给出了PAPI profiling的示例
 
-![PAPI_tu](pics\PAPI\PAPI_tu.png)
+![PAPI_tu](../assets/pics\PAPI\PAPI_tu.png)
 
 其中`mod, params = mlp.get_workload(1)`的作用与
 
@@ -114,6 +114,6 @@ data = tvm.nd.array(np.random.rand(16, 512).astype(int), device=dev)
 
 实际的gpt PAPI profiling代码参见[papi.py](https://github.com/nineis7/tvm-gpt/blob/main/tutorials/papi.py)，结果参见[PAPI_profiling_gpt_cuda.txt](https://github.com/nineis7/tvm-gpt/blob/main/artifacts/PAPI_profiling/PAPI_profiling_gpt_cuda.txt)和[PAPI_profiling_gpt_llvm.txt](https://github.com/nineis7/tvm-gpt/blob/main/artifacts/PAPI_profiling/PAPI_profiling_gpt_llvm.txt)：
 
-![PAPI_profiling_gpt_llvm](pics\PAPI\PAPI_profiling_gpt_llvm.png)
+![PAPI_profiling_gpt_llvm](../assets/pics\PAPI\PAPI_profiling_gpt_llvm.png)
 
-![PAPI_profiling_gpt_cuda](pics\PAPI\PAPI_profiling_gpt_cuda.png)
+![PAPI_profiling_gpt_cuda](../assets/pics\PAPI\PAPI_profiling_gpt_cuda.png)

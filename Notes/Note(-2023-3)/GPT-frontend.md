@@ -60,7 +60,7 @@ Concept：
 
 在以下情况下使用微调：1）自身微调任务与预训练模型数据集相似，2）自身模型正确率太低，3）数据集数量太少，4）计算资源太少
 
-![微调guide](pics/GPT-frontend/微调guide.png)
+![微调guide](../assets/pics/GPT-frontend/微调guide.png)
 
 gpt的QA相当于是对于给定squence，输出squence之后的内容（这些内容就是对于给定squence的answer）
 

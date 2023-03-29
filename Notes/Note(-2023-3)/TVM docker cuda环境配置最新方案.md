@@ -6,7 +6,7 @@
 
 从外部docker创建环境的方式会导致tvm的各种依赖不满足条件的问题，采用tvm/docker中的GPU images，网址为[tvm/docker at main · apache/tvm (github.com)](https://github.com/apache/tvm/tree/main/docker)。
 
-![tvm_docker](pics/docker_cuda/tvm_docker.png)
+![tvm_docker](../assets/pics/docker_cuda/tvm_docker.png)
 
 使用Dockerfile.ci_gpu，并且进行一些个性化更改，更改文件见[code/docker/Dockerfile.ci_gpu]。用该文件替换tvm/docker下的同名文件，其余无需修改。
 
@@ -75,7 +75,7 @@ sudo git config --global user.email "youremail"
 
 在github主页新建repo，按照repo上的command line走：
 
-![git](pics/docker_cuda/git.png)
+![git](../assets/pics/docker_cuda/git.png)
 
 注意在tvm docker环境内，除了最后一句`git push -u origin main`不需要加`sudo`其他command均需要加`sudo`;
 

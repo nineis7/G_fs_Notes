@@ -4,7 +4,7 @@
 
 GELU(Gaussian Error Linear Unit，高斯误差线性单元)激活函数的定义利用的是门控机制，有`GELU=xP(X<=x)`，即：
 
-![InitialGELU](pics/Ops/InitialGELU.png)
+![InitialGELU](../assets/pics/Ops/InitialGELU.png)
 
 BERT中最先使用的便是非近似表示：
 
@@ -15,7 +15,7 @@ def _gelu_python(self, input: Tensor) -> Tensor:
 
 目前实际应用中一般用近似函数来表示：
 
-![GELU](\pics\Ops\GELU.PNG)
+![GELU](../assets/\pics\Ops\GELU.PNG)
 
 在oneflow中的new_GELU算子实现中，原GELU的实现为
 
@@ -42,7 +42,7 @@ class NewGELUActivation(nn.Module):
 
 [transformers/src/transformers/activations.py](https://github.com/huggingface/transformers/blob/main/src/transformers/activations.py)中也列举了其他一些GELU变体：
 
-![GLEU types](pics/Ops/GLEU types.png)
+![GLEU types](../assets/pics/Ops/GLEU types.png)
 
 CodeGeeX中使用oneflow进行后端推理，其优化中有关于GELU的融合优化，但目前没找到具体代码实现。
 

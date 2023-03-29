@@ -31,7 +31,7 @@ mlc关键元素：Tensor and TensorFunction，mlc所做的便是张量函数之�
 
 call_tir(prim_func, inputs, shape, dtype) ，引入call_tir是因为元张量函数(即prim_func)本身具有destination passing的约定，而out的数组的开辟便由call_tir来完成。这是一个底层转高层的过程，将底层函数用标准计算图的形式来表示出来，如下图所示：
 
-![side-effect](pics/MLC/side-effect.png)
+![side-effect](../assets/pics/MLC/side-effect.png)
 
 下图不适用call_tir时计算图的表示比较混乱，出现了显式lv0等中间结果节点，即出现了side-effect。
 
@@ -139,7 +139,7 @@ binding.value
 
 其中CallNode为调用节点，Op(relax.multiply)为操作，后面为参数列表
 
-![IRModule_structure](pics/MLC/IRModule_structure.png)
+![IRModule_structure](../assets/pics/MLC/IRModule_structure.png)
 
 visit pattern 设计模式
 
@@ -165,15 +165,15 @@ NCHW：通道优先，更适合需要对每个通道单独运算的操作，如M
 
 NHWC：不同通道中同一位置优先顺序存储，更适合那些对不同通道同一位置的数据进行运算的操作，如Conv1x1，更适合多核CPU运算
 
-![NHWC](pics/MLC/NHWC.png)
+![NHWC](../assets/pics/MLC/NHWC.png)
 
-![NHWC_example](pics/MLC/NHWC_example.png)
+![NHWC_example](../assets/pics/MLC/NHWC_example.png)
 
 相比于NCHW将所有数据读取完后一次性计算，NHWC每次计算出最终结果的一部分。
 
 数据排布转换可通过`Tensor.reshape([N, H, W, C1, C0]).transpose([0, 3, 1, 2, 4])`样完成。
 
-![Fractal Z](pics/MLC/Fractal Z.png)
+![Fractal Z](../assets/pics/MLC/Fractal Z.png)
 
 z为横向优先，n为纵向优先
 
@@ -188,9 +188,9 @@ z为横向优先，n为纵向优先
 
 ![常量折叠](pics/MLC/常量折叠.png)
 
-![BN折叠](pics/MLC/BN折叠.png)
+![BN折叠](../assets/pics/MLC/BN折叠.png)
 
-![BN折叠2](pics/MLC/BN折叠2.png)
+![BN折叠2](../assets/pics/MLC/BN折叠2.png)
 
 常量折叠分类：
 
@@ -198,13 +198,13 @@ z为横向优先，n为纵向优先
 2. 常量折叠与数据形状shape有关，通过计算图已有信息推断出形状结果之后，用来代替原来的节点
 3. 常量折叠与已知常量的代数化简有关
 
-![TensorFlow常量折叠PASS](pics/MLC/TensorFlow常量折叠PASS.png)
+![TensorFlow常量折叠PASS](../assets/pics/MLC/TensorFlow常量折叠PASS.png)
 
 #### 公共子表达式消除
 
-![CSEinAI](pics/MLC/CSEinAI.png)
+![CSEinAI](../assets/pics/MLC/CSEinAI.png)
 
-![CSEinAI2](pics/MLC/CSEinAI2.png)
+![CSEinAI2](../assets/pics/MLC/CSEinAI2.png)
 
 其中采用逆后序表示是为了确定得到拓扑排序，访问节点的依赖节点都已被访问。（前序遍历不一定得到拓扑排序[ 请教拓扑排序中的一点疑问？](https://www.zhihu.com/question/28549004)）有向无环图的拓扑顺序就是所有顶点的逆后序排列。DFS逆转即为将本来结果{DBCA}转为{ACBD}
 
@@ -220,6 +220,6 @@ AI中的DCE通常应用在其他PASS之后，也就是其他PASS后出现不被�
 
 算术化简分为{结合律化简、分配律化简、交换律化简}
 
-![代数化简1](pics/MLC/代数化简1.png)
+![代数化简1](../assets/pics/MLC/代数化简1.png)
 
 广播化简：位置替换（将shape相同的放在一起计算）
